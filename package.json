@@ -1,0 +1,68 @@
+{
+  "name": "glo-web-clipper",
+  "productName": "Glo Web Clipper",
+  "version": "1.0.0",
+  "description": "A web clipper for GitKraken Glo Boards.",
+  "repository": "https://github.com/jmerle/glo-web-clipper",
+  "author": "Jasper van Merle",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "webpack --progress --colors --mode=production",
+    "watch": "yarn build --watch",
+    "lint:code": "tslint -p tsconfig.json -c tslint.json -t stylish",
+    "lint:package": "yarn build && web-ext lint -s build/ -o text",
+    "package": "yarn build && web-ext build -s build/ -a dist/ -o",
+    "generate-icons": "node scripts/generate-icons",
+    "start:firefox": "web-ext run -s build/ --start-url https://imgur.com/ --pref devtools.browserconsole.filter.jswarn=false --pref devtools.webconsole.filter.warn=false",
+    "start:chrome": "node scripts/chrome-launch",
+    "dev:firefox": "yarn build && concurrently 'yarn start:firefox' 'yarn watch' -n web-ext,webpack -c blue,yellow --kill-others",
+    "dev:chrome": "yarn build && concurrently 'yarn start:chrome' 'yarn watch' -n chrome,webpack -c blue,yellow --kill-others"
+  },
+  "dependencies": {
+    "webextension-polyfill": "^0.4.0"
+  },
+  "devDependencies": {
+    "@types/copy-webpack-plugin": "^4.4.3",
+    "@types/node": "^11.11.3",
+    "chrome-launch": "^1.1.4",
+    "concurrently": "^4.1.0",
+    "copy-webpack-plugin": "^5.0.1",
+    "husky": "^1.3.1",
+    "lint-staged": "^8.1.5",
+    "prettier": "^1.16.4",
+    "rimraf": "^2.6.3",
+    "sharp": "^0.21.3",
+    "svgexport": "^0.3.2",
+    "ts-loader": "^5.3.3",
+    "ts-node": "^8.0.3",
+    "tslint": "^5.14.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.3.3333",
+    "web-ext": "^3.0.0",
+    "web-ext-types": "^3.1.0",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "yarn lint:code --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "*.{js,json,html}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all",
+    "printWidth": 120
+  }
+}
