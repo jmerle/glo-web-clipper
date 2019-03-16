@@ -5,6 +5,7 @@
     "no-console": false,
     "object-literal-sort-keys": false,
     "typedef": [true, "call-signature", "parameter", "property-declaration"],
-    "member-ordering": false
+    "member-ordering": false,
+    "no-duplicate-imports": [true, { "allow-namespace-imports": true }]
   }
 }

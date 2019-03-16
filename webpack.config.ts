@@ -20,9 +20,8 @@ function transformManifest(content: string): string {
 
 const config: webpack.Configuration = {
   entry: {
-    background: path.resolve(__dirname, 'src/background/index.ts'),
-    content: path.resolve(__dirname, 'src/content/index.ts'),
-    options: path.resolve(__dirname, 'src/options/index.ts'),
+    background: path.resolve(__dirname, 'src/background.ts'),
+    content: path.resolve(__dirname, 'src/content.ts'),
   },
   output: {
     filename: '[name].js',
@@ -43,6 +42,9 @@ const config: webpack.Configuration = {
   performance: {
     hints: false,
   },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js'],
+  },
   plugins: [
     new CopyWebpackPlugin([
       {
@@ -57,10 +59,6 @@ const config: webpack.Configuration = {
       {
         from: path.resolve(__dirname, 'node_modules/webextension-polyfill/dist/browser-polyfill.min.js'),
         to: path.resolve(__dirname, 'build/js'),
-      },
-      {
-        from: path.resolve(__dirname, 'src/options/index.html'),
-        to: path.resolve(__dirname, 'build/options.html'),
       },
       {
         from: path.resolve(__dirname, 'LICENSE'),

@@ -15,8 +15,8 @@ cd glo-web-clipper
 # Install the dependencies
 yarn
 
-# Generate the icons
-yarn generate-icons
+# Generate the icons and the API client
+yarn generate
 
 # Decide what you want to do next
 
@@ -50,7 +50,7 @@ Software versions used:
 Node.js: 10.15.0  
 Yarn: 1.13.0
 
-Third-party libraries that can be found in the minified extension:  
+Third-party libraries that can be found in the extension:  
 - [webextension-polyfill 0.4.0](https://github.com/mozilla/webextension-polyfill/blob/0.4.0/src/browser-polyfill.js)
 
 Package the extension by `cd`'ing into the source code submission directory, installing the dependencies with `yarn` and packaging with `yarn package`. The result can be found in the dist/ directory.

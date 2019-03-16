@@ -61,6 +61,8 @@ typings/
 build/
 dist/
 icons/
+src/api
+api.json
 
 # NPM (Yarn is used)
 .package-lock.json
