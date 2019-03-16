@@ -1,18 +1,18 @@
 // tslint:disable no-implicit-dependencies
 
-import { copyFile, remove, writeFile } from 'fs-extra';
-import { resolve } from 'path';
+import * as fs from 'fs-extra';
+import * as path from 'path';
 import * as sharp from 'sharp';
-import { render } from 'svgexport';
-import { promisify } from 'util';
+import * as svgexport from 'svgexport';
+import * as util from 'util';
 
-const renderAsync = promisify(render);
+const renderAsync = util.promisify(svgexport.render);
 
 (async () => {
   const sizes = [16, 19, 20, 24, 32, 38, 48, 64, 96];
 
-  const inputPath = resolve(__dirname, '../assets/icon.svg');
-  const outputPath = (size: number) => resolve(__dirname, `../icons/icon-${size}.png`);
+  const inputPath = path.resolve(__dirname, '../assets/icon.svg');
+  const outputPath = (size: number) => path.resolve(__dirname, `../icons/icon-${size}.png`);
 
   const options = sizes.map(size => ({
     input: [inputPath, `${size}:${size}`],
@@ -20,7 +20,7 @@ const renderAsync = promisify(render);
   }));
 
   console.log('Removing existing icons');
-  await remove(resolve(__dirname, '../icons'));
+  await fs.remove(path.resolve(__dirname, '../icons'));
 
   console.log(`Creating ${sizes.length} icons based on ${inputPath} with the following sizes: ${sizes.join(', ')}`);
   await renderAsync(options);
@@ -30,7 +30,7 @@ const renderAsync = promisify(render);
   const paddedIconPath = outputPath(128);
   const padding = 16;
 
-  await copyFile(outputPath(96), paddedIconPath);
+  await fs.copyFile(outputPath(96), paddedIconPath);
   const buffer = await sharp(paddedIconPath)
     .extend({
       top: padding,
@@ -46,5 +46,5 @@ const renderAsync = promisify(render);
     })
     .toBuffer();
 
-  await writeFile(paddedIconPath, buffer);
+  await fs.writeFile(paddedIconPath, buffer);
 })();

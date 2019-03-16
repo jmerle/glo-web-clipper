@@ -1,11 +1,10 @@
 // tslint:disable no-implicit-dependencies
 
 import * as execa from 'execa';
-import { Options } from 'execa';
-import { readFile, remove, writeFile } from 'fs-extra';
+import * as fs from 'fs-extra';
 import * as got from 'got';
 import * as path from 'path';
-import { Context, createContext, runInContext } from 'vm';
+import * as vm from 'vm';
 
 function findDeep(obj: any, key: string, results: any[] = []): any[] {
   Object.keys(obj).forEach(k => {
@@ -22,7 +21,7 @@ function findDeep(obj: any, key: string, results: any[] = []): any[] {
   return results;
 }
 
-function exec(file: string, args?: ReadonlyArray<string>, options?: Options): Promise<void> {
+function exec(file: string, args?: ReadonlyArray<string>, options?: execa.Options): Promise<void> {
   return new Promise((resolve, reject) => {
     console.log(`$ ${file} ${args.join(' ')}`.trim());
 
@@ -96,7 +95,7 @@ const operationIds: { [path: string]: { [method: string]: string } } = {
     .slice(1, -1)
     .join('\n');
 
-  const context: Context = {
+  const context: vm.Context = {
     window: {
       location: {
         search: '',
@@ -105,8 +104,8 @@ const operationIds: { [path: string]: { [method: string]: string } } = {
   };
 
   try {
-    createContext(context);
-    runInContext(fnBody, context);
+    vm.createContext(context);
+    vm.runInContext(fnBody, context);
   } catch (err) {
     // We only need the script to run until spec1 is set
     // Any errors after that has happened are ignored
@@ -147,12 +146,12 @@ const operationIds: { [path: string]: { [method: string]: string } } = {
 
   const definitionPath = path.resolve(__dirname, '../api.json');
   const definitionData = JSON.stringify(spec, null, 2);
-  await writeFile(definitionPath, definitionData);
+  await fs.writeFile(definitionPath, definitionData);
 
   console.log('Removing current API client');
 
   const apiDirectory = path.resolve(__dirname, '../src/api');
-  await remove(apiDirectory);
+  await fs.remove(apiDirectory);
 
   console.log('Generating new API client');
 
@@ -175,7 +174,7 @@ const operationIds: { [path: string]: { [method: string]: string } } = {
 
   // Ignore "implicitly has an 'any' return type" errors in the generated files
   const runtimePath = path.resolve(apiDirectory, 'runtime.ts');
-  const content = await readFile(runtimePath, 'utf8');
+  const content = await fs.readFile(runtimePath, 'utf8');
   const lines = content.trim().split('\n');
 
   for (let i = 0; i < lines.length; i++) {
@@ -187,7 +186,7 @@ const operationIds: { [path: string]: { [method: string]: string } } = {
     }
   }
 
-  await writeFile(runtimePath, lines.join('\n') + '\n');
+  await fs.writeFile(runtimePath, lines.join('\n') + '\n');
 
   // Formatting files using Prettier
   await exec('yarn', ['prettier', '--write', apiDirectory + '/**/*.{ts,json}']);
