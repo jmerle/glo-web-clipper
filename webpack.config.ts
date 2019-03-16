@@ -48,7 +48,7 @@ const config: webpack.Configuration = {
   plugins: [
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, 'static/manifest.json'),
+        from: path.resolve(__dirname, 'assets/manifest.json'),
         to: path.resolve(__dirname, 'build'),
         transform: transformManifest,
       },
