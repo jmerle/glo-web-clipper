@@ -190,5 +190,5 @@ const operationIds: { [path: string]: { [method: string]: string } } = {
   await writeFile(runtimePath, lines.join('\n') + '\n');
 
   // Formatting files using Prettier
-  await exec('yarn', ['prettier', '--write', apiDirectory + '/**/*.ts']);
+  await exec('yarn', ['prettier', '--write', apiDirectory + '/**/*.{ts,json}']);
 })();
