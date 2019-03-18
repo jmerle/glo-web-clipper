@@ -36,6 +36,7 @@ yarn package
 # Automatically re-compiles the code when the source changes
 # Automatically reloads the extension in the Firefox instance when the code is re-compiled
 # Refresh the page after the extension got reloaded to see the new changes
+# Make sure to create a new profile called "glo-web-clipper" on about:profiles before running this command
 yarn dev:firefox
 
 # Does the same as dev:firefox but with Chrome, with the exception that the extension is not automatically reloaded

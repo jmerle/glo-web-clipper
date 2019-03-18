@@ -8,6 +8,7 @@ function handleMessage(message: Message | any, sender: browser.runtime.MessageSe
   switch (message.action) {
     case MessageAction.ToggleClipper:
       console.log('Toggling!');
+      alert(browser.runtime.getURL('/callback.html'));
       break;
   }
 }
