@@ -10,38 +10,57 @@
   "scripts": {
     "build": "webpack --progress --colors --mode=production",
     "watch": "yarn build --watch",
-    "lint": "yarn lint:code && yarn lint:package",
+    "lint": "yarn lint:code && yarn lint:style && yarn lint:package",
     "lint:code": "tslint -p tsconfig.json -c tslint.json -t stylish",
+    "lint:style": "stylelint styles/**/*.scss",
     "lint:package": "yarn build && web-ext lint -s build/ -o text",
     "package": "yarn build && web-ext build -s build/ -a dist/ -o",
     "generate": "yarn generate:icons && yarn generate:api",
     "generate:icons": "ts-node scripts/generate-icons",
     "generate:api": "ts-node scripts/generate-api",
-    "start:firefox": "web-ext run -p glo-web-clipper --keep-profile-changes -s build/ --start-url https://imgur.com/ --pref devtools.browserconsole.filter.jswarn=false --pref devtools.webconsole.filter.warn=false",
+    "start:firefox": "web-ext run -s build/ --start-url https://imgur.com/ --pref devtools.browserconsole.filter.jswarn=false --pref devtools.webconsole.filter.warn=false",
     "start:chrome": "ts-node scripts/chrome-launch",
     "dev:firefox": "yarn build && concurrently 'yarn start:firefox' 'yarn watch' -n web-ext,webpack -c blue,yellow --kill-others",
     "dev:chrome": "yarn build && concurrently 'yarn start:chrome' 'yarn watch' -n chrome,webpack -c blue,yellow --kill-others"
   },
   "dependencies": {
+    "hyperapp": "^1.2.9",
     "webextension-polyfill": "^0.4.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-transform-react-jsx": "^7.3.0",
+    "@babel/preset-env": "^7.3.4",
     "@types/copy-webpack-plugin": "^4.4.3",
     "@types/execa": "^0.9.0",
     "@types/fs-extra": "^5.0.5",
     "@types/got": "^9.4.1",
+    "@types/mini-css-extract-plugin": "^0.2.0",
     "@types/node": "^11.11.3",
     "@types/sharp": "^0.21.3",
+    "babel-loader": "^8.0.5",
     "chrome-launch": "^1.1.4",
     "concurrently": "^4.1.0",
     "copy-webpack-plugin": "^5.0.1",
+    "css-loader": "^2.1.1",
     "execa": "^1.0.0",
     "fs-extra": "^7.0.1",
     "got": "^9.6.0",
     "husky": "^1.3.1",
     "lint-staged": "^8.1.5",
+    "mini-css-extract-plugin": "^0.5.0",
+    "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^6.6.0",
     "prettier": "^1.16.4",
+    "rimraf": "^2.6.3",
+    "sass": "^1.17.3",
+    "sass-loader": "^7.1.0",
     "sharp": "^0.21.3",
+    "stylelint": "^9.10.1",
+    "stylelint-config-palantir": "^4.0.0",
+    "stylelint-config-prettier": "^5.0.0",
+    "stylelint-config-standard": "^18.2.0",
+    "stylelint-scss": "^3.5.4",
     "svgexport": "^0.3.2",
     "ts-loader": "^5.3.3",
     "ts-node": "^8.0.3",
@@ -64,6 +83,11 @@
       "prettier --write",
       "git add"
     ],
+    "*.scss": [
+      "yarn lint:style --fix",
+      "prettier --write",
+      "git add"
+    ],
     "*.json": [
       "prettier --write",
       "git add"
@@ -73,5 +97,32 @@
     "singleQuote": true,
     "trailingComma": "all",
     "printWidth": 120
-  }
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-config-palantir",
+      "stylelint-config-palantir/sass.js",
+      "stylelint-config-prettier"
+    ],
+    "rules": {
+      "selector-max-id": 1
+    }
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-transform-react-jsx",
+        {
+          "pragma": "h"
+        }
+      ]
+    ]
+  },
+  "browserslist": [
+    "last 3 chrome versions",
+    "last 3 firefox versions"
+  ]
 }

@@ -1,6 +1,7 @@
 // tslint:disable no-implicit-dependencies
 
 import * as CopyWebpackPlugin from 'copy-webpack-plugin';
+import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import * as path from 'path';
 import * as webpack from 'webpack';
 
@@ -24,15 +25,35 @@ const config: webpack.Configuration = {
     content: path.resolve(__dirname, 'src/content.ts'),
   },
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'build/js'),
+    filename: 'js/[name].js',
+    path: path.resolve(__dirname, 'build'),
   },
   module: {
     rules: [
       {
         exclude: /(node_modules)/,
-        loader: 'ts-loader',
+        use: ['babel-loader', 'ts-loader'],
         test: /\.tsx?$/,
+      },
+      {
+        exclude: /(node_modules)/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [require('postcss-preset-env')()],
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              implementation: require('sass'),
+            },
+          },
+        ],
+        test: /\.s?css$/,
       },
     ],
   },
@@ -65,6 +86,9 @@ const config: webpack.Configuration = {
         to: path.resolve(__dirname, 'build'),
       },
     ]),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css',
+    }),
   ],
 };
 
