@@ -1,9 +1,35 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
 #glo-web-clipper {
+  @import 'variables';
+
+  @import 'modules/reset';
+  @import 'modules/normalize';
+
+  @import 'modules/box';
+  @import 'modules/grid';
+  @import 'modules/header';
+  @import 'modules/buttons';
+  @import 'modules/forms';
+  @import 'modules/preview';
+
+  font-family: 'Open Sans', sans-serif;
+  color: $text-normal;
+  font-size: 14px;
+
+  box-sizing: border-box;
+
   display: block;
-  position: absolute;
+  position: fixed;
+  width: 300px;
 
   top: 10px;
   right: 10px;
+  z-index: 2147483647 !important;
 
-  z-index: 1000;
+  user-select: none;
+
+  ::selection {
+    background: $accent;
+  }
 }

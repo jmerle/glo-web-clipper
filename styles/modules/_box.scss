@@ -1,0 +1,10 @@
+.gwc-box {
+  display: block;
+  background: $background;
+
+  padding: 10px;
+
+  box-shadow: $accent 0 0 5px;
+  border-radius: 4px;
+  border: 1px solid $accent;
+}

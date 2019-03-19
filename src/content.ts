@@ -12,7 +12,6 @@ let main: Actions = null;
 function toggle(): void {
   if (main === null) {
     const containerElem = document.createElement('div');
-
     containerElem.setAttribute('id', 'glo-web-clipper');
     document.body.appendChild(containerElem);
 

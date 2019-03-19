@@ -1,0 +1,89 @@
+.gwc-checkbox {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  line-height: 25px;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+  }
+
+  span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 25px;
+    height: 25px;
+    background: $btn-primary-hover;
+    border: 1px solid $btn-primary-border;
+    border-radius: 3px;
+  }
+
+  &:hover input:not(:checked) ~ span:after {
+    display: block;
+    border-color: lighten($btn-primary-hover, 25%);
+  }
+
+  span:after {
+    content: '';
+    position: absolute;
+    display: none;
+
+    left: 8px;
+    top: 2px;
+    width: 8px;
+    height: 15px;
+    border: solid $text-normal;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+  }
+
+  input:checked ~ span:after {
+    display: block;
+  }
+}
+
+.gwc-form-section {
+  margin-bottom: 5px;
+
+  label {
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  input[type='text'],
+  select {
+    display: block;
+    width: 100%;
+    color: $text-normal;
+    background: $btn-primary-bg;
+    border: 1px solid $btn-primary-border;
+    border-radius: 3px;
+    outline: none;
+
+    &::placeholder {
+      color: lighten($btn-primary-hover, 25%);
+    }
+  }
+
+  input[type='text'] {
+    padding: 6px;
+  }
+
+  select {
+    padding: 3px;
+    cursor: pointer;
+
+    option {
+      color: $text-inverse;
+
+      &:disabled {
+        font-weight: bold;
+      }
+    }
+  }
+}

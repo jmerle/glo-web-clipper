@@ -2,6 +2,6 @@
 
 import chromeLaunch = require('chrome-launch');
 
-chromeLaunch('https://imgur.com/', {
+chromeLaunch('https://jaspervanmerle.com/', {
   args: ['--start-maximized', '--load-extension=./build'],
 });

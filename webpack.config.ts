@@ -32,7 +32,7 @@ const config: webpack.Configuration = {
     rules: [
       {
         exclude: /(node_modules)/,
-        use: ['babel-loader', 'ts-loader'],
+        loader: 'ts-loader',
         test: /\.tsx?$/,
       },
       {
