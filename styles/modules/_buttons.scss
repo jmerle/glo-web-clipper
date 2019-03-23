@@ -34,7 +34,7 @@
     }
   }
 
-  &.gwc-selection-btn {
+  &.gwc-icon-btn {
     width: 100%;
     height: 100%;
     padding: 10px 5px;
@@ -60,43 +60,41 @@
     &:hover:not(:disabled) {
       background: darken($background, 5%);
     }
-  }
 
-  &.gwc-option-btn {
-    @extend .gwc-selection-btn;
+    &.gwc-selectable-btn {
+      svg {
+        width: 100%;
+        height: 30px;
 
-    svg {
-      width: 100%;
-      height: 30px;
-
-      path {
-        stroke: $text-secondary;
-      }
-    }
-
-    .gwc-btn-label {
-      color: $text-secondary;
-    }
-
-    &.gwc-selected-btn {
-      svg > path {
-        stroke: $text-normal;
+        path {
+          stroke: $text-secondary;
+        }
       }
 
       .gwc-btn-label {
-        color: $text-normal;
-      }
-    }
-
-    &:hover:not(:disabled) {
-      background: inherit;
-
-      svg > path {
-        stroke: $text-normal;
+        color: $text-secondary;
       }
 
-      .gwc-btn-label {
-        color: $text-normal;
+      &.gwc-selected-btn {
+        svg > path {
+          stroke: $text-normal;
+        }
+
+        .gwc-btn-label {
+          color: $text-normal;
+        }
+      }
+
+      &:hover:not(:disabled) {
+        background: inherit;
+
+        svg > path {
+          stroke: $text-normal;
+        }
+
+        .gwc-btn-label {
+          color: $text-normal;
+        }
       }
     }
   }
@@ -104,7 +102,7 @@
 
 .gwc-close-btn {
   position: absolute;
-  top: 5px;
+  top: 2px;
   right: 5px;
   cursor: pointer;
   color: $text-secondary;
