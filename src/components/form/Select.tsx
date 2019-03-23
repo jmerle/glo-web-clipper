@@ -1,5 +1,5 @@
 import { Component, h, VNode } from 'hyperapp';
-import { FormSection } from './FormSection';
+import { FormSection } from '../containers/FormSection';
 
 interface SelectItem {
   value: string;

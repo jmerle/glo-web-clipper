@@ -1,7 +1,9 @@
 .gwc-box {
+  position: relative;
   display: block;
   background: $background;
 
+  margin: 10px;
   padding: 10px;
 
   box-shadow: $accent 0 0 5px;
