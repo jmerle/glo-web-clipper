@@ -2,20 +2,40 @@ import { app } from 'hyperapp';
 import { Actions, actions } from './app/actions';
 import { state } from './app/state';
 import { view } from './app/view';
+import { StatusCheckState } from './components/form/StatusCheck';
+import { config } from './utils/config';
 import { Message, MessageAction } from './utils/messaging';
 
 // tslint:disable-next-line no-var-requires
 require('../styles/content.scss');
 
 let main: Actions = null;
+let initiating = false;
 
-function toggle(): void {
+async function toggle(): Promise<void> {
+  if (main == null && initiating) {
+    return;
+  }
+
+  initiating = true;
+
   if (main === null) {
+    state.accessToken = await config.getAccessToken();
+
     const containerElem = document.createElement('div');
     containerElem.setAttribute('id', 'glo-web-clipper');
     document.body.appendChild(containerElem);
 
     main = app(state, actions, view, containerElem);
+
+    config.onAccessTokenChanged(main.setAccessToken);
+
+    if (state.accessToken !== null) {
+      main.setAccessTokenChecksVisible(true);
+      main.setBoardReadState(StatusCheckState.Success);
+      main.setBoardWriteState(StatusCheckState.Success);
+      main.setNewAccessToken(state.accessToken);
+    }
   } else {
     main.setVisible(true);
   }

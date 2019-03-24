@@ -1,0 +1,17 @@
+.gwc-input {
+  display: block;
+  padding: 6px;
+  width: 100%;
+
+  color: $text-normal;
+  background: $btn-primary-bg;
+
+  border: 1px solid $btn-primary-border;
+  border-radius: 3px;
+
+  outline: none;
+
+  &::placeholder {
+    color: lighten($btn-primary-hover, 25%);
+  }
+}

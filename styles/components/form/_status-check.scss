@@ -1,0 +1,40 @@
+.gwc-status-check {
+  svg {
+    height: 14px;
+    vertical-align: middle;
+
+    fill: $text-normal;
+
+    path {
+      stroke: $text-normal;
+    }
+  }
+
+  &.gwc-status-check-checking {
+    svg {
+      animation-name: gwc-status-check-rotate;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      transform-origin: 50% 50%;
+    }
+  }
+
+  &.gwc-status-check-success {
+    color: green;
+  }
+
+  &.gwc-status-check-failed {
+    color: red;
+  }
+}
+
+@keyframes gwc-status-check-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

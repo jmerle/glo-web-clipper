@@ -1,0 +1,36 @@
+.gwc-btn {
+  display: block;
+  cursor: pointer;
+  outline: none !important;
+  font-weight: normal;
+
+  transition: none;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:focus {
+    box-shadow: none;
+  }
+
+  &.gwc-primary-btn {
+    margin: 5px 0 0;
+    padding: 0;
+
+    height: 30px;
+    width: 100%;
+
+    font-size: 16px;
+    color: $text-normal;
+
+    background: $btn-primary-bg;
+    border: 1px solid $btn-primary-border;
+    border-radius: 3px;
+
+    &:hover:not(:disabled) {
+      background: $btn-primary-hover;
+    }
+  }
+}

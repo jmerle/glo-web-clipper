@@ -1,0 +1,14 @@
+.gwc-select {
+  @extend .gwc-input;
+
+  padding: 3px;
+  cursor: pointer;
+
+  option {
+    color: $text-inverse;
+
+    &:disabled {
+      font-weight: bold;
+    }
+  }
+}

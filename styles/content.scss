@@ -3,15 +3,22 @@
 #glo-web-clipper {
   @import 'variables';
 
-  @import 'modules/reset';
-  @import 'modules/normalize';
+  @import 'utils/reset';
+  @import 'utils/normalize';
 
-  @import 'modules/box';
-  @import 'modules/grid';
-  @import 'modules/header';
-  @import 'modules/buttons';
-  @import 'modules/forms';
-  @import 'modules/preview';
+  @import 'components/grid';
+
+  @import 'components/containers/box';
+  @import 'components/containers/section';
+  @import 'components/containers/form-section';
+
+  @import 'components/buttons/button';
+  @import 'components/buttons/icon-button';
+
+  @import 'components/form/checkbox';
+  @import 'components/form/input';
+  @import 'components/form/select';
+  @import 'components/form/status-check';
 
   font-family: 'Open Sans', sans-serif;
   color: $text-normal;
@@ -31,5 +38,21 @@
 
   ::selection {
     background: $accent;
+  }
+
+  a {
+    color: $accent;
+  }
+
+  code {
+    color: $text-normal;
+    background: none;
+  }
+
+  .gwc-preview {
+    display: block;
+    max-width: 100%;
+    max-height: 200px;
+    margin: 0 auto;
   }
 }

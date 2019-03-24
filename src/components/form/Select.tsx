@@ -16,7 +16,7 @@ export const Select: Component<Attributes> = ({ label, options, placeholder = la
   (
     <FormSection>
       <label>{label}</label>
-      <select>
+      <select class="gwc-select">
         <option disabled selected>
           {placeholder}
         </option>
