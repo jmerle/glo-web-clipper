@@ -46,6 +46,8 @@
       width: 100%;
       height: 50px;
 
+      fill: $text-normal;
+
       path {
         stroke: $text-normal;
       }
@@ -66,6 +68,8 @@
         width: 100%;
         height: 30px;
 
+        fill: $text-secondary;
+
         path {
           stroke: $text-secondary;
         }
@@ -76,8 +80,12 @@
       }
 
       &.gwc-selected-btn {
-        svg > path {
-          stroke: $text-normal;
+        svg {
+          fill: $text-normal;
+
+          path {
+            stroke: $text-normal;
+          }
         }
 
         .gwc-btn-label {
@@ -88,8 +96,12 @@
       &:hover:not(:disabled) {
         background: inherit;
 
-        svg > path {
-          stroke: $text-normal;
+        svg {
+          fill: $text-normal;
+
+          path {
+            stroke: $text-normal;
+          }
         }
 
         .gwc-btn-label {

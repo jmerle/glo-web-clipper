@@ -43,6 +43,9 @@ yarn dev:firefox
 yarn dev:chrome
 ```
 
+## Icons
+The icons are from the [Noun Project](https://thenounproject.com/).
+
 ## Mozilla reviewers
 The information provided below is meant for Mozilla volunteers.
 
