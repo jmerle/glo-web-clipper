@@ -3,15 +3,16 @@ import { FormSection } from '../containers/FormSection';
 
 interface Attributes {
   label: string;
-  selected?: boolean;
+  onChange: (checked: boolean) => void;
+  initialValue?: boolean;
 }
 
-export const Checkbox: Component<Attributes> = ({ label, selected = false }) =>
+export const Checkbox: Component<Attributes> = ({ label, onChange, initialValue = false }) =>
   (
     <FormSection>
       <label className="gwc-checkbox">
         {label}
-        <input type="checkbox" name="checked" defaultChecked={selected} />
+        <input type="checkbox" name="checked" onchange={(ev: any) => onChange(ev.target.checked)} defaultChecked={initialValue} />
         <span />
       </label>
     </FormSection>
