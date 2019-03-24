@@ -9,4 +9,8 @@
   box-shadow: $accent 0 0 5px;
   border-radius: 4px;
   border: 1px solid $accent;
+
+  &.gwc-box-hidden {
+    display: none;
+  }
 }
