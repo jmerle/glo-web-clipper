@@ -49,13 +49,5 @@
     },
     "default_title": "Clip to Glo",
     "browser_style": false
-  },
-
-  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnkxPz+7BCsNq1YKHCzri5k8EBlzSlUZo4TNvAw+L2bM6staIxJ1JK281HpRTC+QkEq2/GAbuEP6fuD3GW6sKitsCMc1tbeCCfAzEJYJz1GJHrLXdPw/7cATZ0UUHou+gGQVDfebNkXn2Wp30MUhwK6fFC5/hktwk2G31yFXaBZdNCLS7CQgOeGQONRcYAQFfqqKx67QS9FGvaLY59vrdDrqjZ1MmQmcWvOLGHkW81lpOleNAhyznQ3olhEmPTfinJyQXJiA9/pxrbm6KhNSSktETMP/jhS2fQ/rim28HjgUUkQzdzUdSfbjO8SN/MDCxAkWaMdX7OZWDPOL77oRpEwIDAQAB",
-
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "glo-web-clipper@jaspervanmerle.com"
-    }
   }
 }
