@@ -1,5 +1,21 @@
-import { MessageAction, sendToContent } from './utils/messaging';
+import { Message, MessageAction, sendToBackground, sendToContent } from './utils/messaging';
 
-browser.browserAction.onClicked.addListener(tab => {
+function onBrowserActionClicked(tab: browser.tabs.Tab): void {
   sendToContent(tab.id, MessageAction.ToggleClipper);
-});
+}
+
+async function handleMessage(message: Message | any, sender: browser.runtime.MessageSender): Promise<void> {
+  if (!sender.tab) {
+    return;
+  }
+
+  switch (message.action) {
+    case MessageAction.CapturePage:
+      const data = await browser.tabs.captureTab(sender.tab.id, { format: 'png', quality: 100 });
+      sendToContent(sender.tab.id, MessageAction.CapturePage, { data });
+      break;
+  }
+}
+
+browser.browserAction.onClicked.addListener(onBrowserActionClicked);
+browser.runtime.onMessage.addListener(handleMessage);

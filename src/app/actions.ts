@@ -83,8 +83,12 @@ export const actions: ActionsType<State, Actions> = {
   runClipper: (clipper: Clipper) => async (state: State, act: Actions) => {
     act.setVisible(false);
 
-    const image = await clipper.getImage();
-    act.setCurrentImage(image);
+    try {
+      const image = await clipper.getImage();
+      act.setCurrentImage(image);
+    } catch (err) {
+      console.error(err);
+    }
 
     act.setVisible(true);
   },

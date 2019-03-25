@@ -1,5 +1,6 @@
 import { Component } from 'hyperapp';
 import { VisiblePageIcon } from '../components/icons';
+import { capturePage } from '../utils/messaging';
 import { Clipper } from './Clipper';
 
 export class VisiblePageClipper extends Clipper {
@@ -12,6 +13,6 @@ export class VisiblePageClipper extends Clipper {
   }
 
   public async getImage(): Promise<string> {
-    return 'https://dummyimage.com/300x300/000/fff.png';
+    return capturePage();
   }
 }

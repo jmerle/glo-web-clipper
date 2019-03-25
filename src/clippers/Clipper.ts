@@ -5,5 +5,5 @@ export abstract class Clipper {
 
   public abstract getIcon(): Component;
 
-  public abstract async getImage(): Promise<string>;
+  public abstract getImage(): Promise<string>;
 }

@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "hyperapp": "^1.2.9",
+    "merge-images": "^1.1.0",
     "normalize.css": "^8.0.1",
     "webextension-polyfill": "^0.4.0"
   },

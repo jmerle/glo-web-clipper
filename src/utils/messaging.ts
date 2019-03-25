@@ -5,6 +5,7 @@ export interface Message {
 
 export enum MessageAction {
   ToggleClipper,
+  CapturePage,
 }
 
 // tslint:disable no-empty
@@ -22,3 +23,22 @@ export function sendToContent(tabId: number, action: MessageAction, payload: any
     .catch(() => {});
 }
 // tslint:enable no-empty
+
+export function capturePage(): Promise<string> {
+  return new Promise(resolve => {
+    const handleMessage = (message: Message | any, sender: browser.runtime.MessageSender) => {
+      if (sender.tab) {
+        return;
+      }
+
+      if (message.action === MessageAction.CapturePage) {
+        browser.runtime.onMessage.removeListener(handleMessage);
+        resolve(message.payload.data);
+      }
+    };
+
+    browser.runtime.onMessage.addListener(handleMessage);
+
+    sendToBackground(MessageAction.CapturePage);
+  });
+}
