@@ -3,7 +3,16 @@ import { Board } from '../api/models';
 import { Clipper } from '../clippers/Clipper';
 import { SelectItem } from '../components/form/Select';
 import { StatusCheckState } from '../components/form/StatusCheck';
-import { getBoards, getCards, hasBoardReadScope, hasBoardWriteScope, isAccessTokenValid } from '../utils/api';
+import {
+  createAttachment,
+  createCard,
+  createComment,
+  getBoards,
+  getCards,
+  hasBoardReadScope,
+  hasBoardWriteScope,
+  isAccessTokenValid,
+} from '../utils/api';
 import { config } from '../utils/config';
 import { State } from './state';
 
@@ -51,6 +60,10 @@ export interface Actions {
 
   selectBoard: (boardId: string) => ActionReturnType;
   selectColumn: (columnId: string) => ActionReturnType;
+
+  setIsSaving: (isSaving: boolean) => ActionReturnType;
+
+  save: () => ActionReturnType;
 }
 
 export const actions: ActionsType<State, Actions> = {
@@ -198,5 +211,43 @@ export const actions: ActionsType<State, Actions> = {
   selectColumn: (columnId: string) => async (state: State, act: Actions) => {
     act.setSelectedColumn(columnId);
     act.loadCards();
+  },
+
+  setIsSaving: (isSaving: boolean) => (state: State) => ({ ...state, isSaving }),
+
+  save: () => async (state: State, act: Actions) => {
+    act.setIsSaving(true);
+
+    try {
+      const { accessToken, includeLink, currentImage } = state;
+      const boardId = state.selectedBoard;
+      const columnId = state.selectedColumn;
+      let cardId = state.selectedCard;
+
+      if (state.createNewCard) {
+        cardId = await createCard(accessToken, boardId, columnId, state.cardName);
+      }
+
+      const commentParts: string[] = [];
+      const currentUrl = window.location.href;
+
+      if (currentImage !== null) {
+        const response = await fetch(state.currentImage);
+        const blob = await response.blob();
+
+        const attachmentUrl = await createAttachment(accessToken, boardId, cardId, blob);
+        commentParts.push(`![Clipped image from ${currentUrl}](${attachmentUrl})`);
+      }
+
+      if (includeLink) {
+        commentParts.push(`Link: ${currentUrl}`);
+      }
+
+      await createComment(accessToken, boardId, cardId, commentParts.join('\n'));
+    } catch (err) {
+      console.error(err);
+    }
+
+    act.setIsSaving(false);
   },
 };

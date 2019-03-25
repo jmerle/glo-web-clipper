@@ -12,7 +12,7 @@ import { Column, Grid } from '../grid';
 import { ExistingCardIcon, NewCardIcon } from '../icons';
 
 export const ClipperView: Component<{}, State, Actions> = () => (state, actions) => {
-  let canSave = true;
+  let canSave = !state.isSaving;
 
   if (state.currentImage === null && !state.includeLink) {
     canSave = false;
@@ -22,7 +22,7 @@ export const ClipperView: Component<{}, State, Actions> = () => (state, actions)
     canSave = false;
   }
 
-  if (state.createNewCard && state.cardName === null) {
+  if (state.createNewCard && (state.cardName === null || state.cardName.trim().length === 0)) {
     canSave = false;
   }
 
@@ -121,7 +121,7 @@ export const ClipperView: Component<{}, State, Actions> = () => (state, actions)
       </Section>
 
       <Section header="Actions">
-        <Button label="Save" disabled={!canSave} onClick={console.log} />
+        <Button label="Save" disabled={!canSave} onClick={actions.save} />
       </Section>
     </Box>
   );

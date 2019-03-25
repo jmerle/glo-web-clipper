@@ -95,3 +95,52 @@ export async function getCards(accessToken: string, boardId: string, columnId: s
 
   return results;
 }
+
+export async function createCard(
+  accessToken: string,
+  boardId: string,
+  columnId: string,
+  name: string,
+): Promise<string> {
+  const card = await getCardsApi(accessToken).createCard({
+    boardId,
+    cardWithColumnId: {
+      columnId,
+      name,
+    },
+  });
+
+  return card.id;
+}
+
+export async function createAttachment(
+  accessToken: string,
+  boardId: string,
+  cardId: string,
+  file: Blob,
+): Promise<string> {
+  const attachment = await getAttachmentsApi(accessToken).createAttachment({
+    boardId,
+    cardId,
+    file,
+  });
+
+  return attachment.url;
+}
+
+export async function createComment(
+  accessToken: string,
+  boardId: string,
+  cardId: string,
+  content: string,
+): Promise<string> {
+  const comment = await getCommentsApi(accessToken).createComment({
+    boardId,
+    cardId,
+    comment: {
+      text: content,
+    },
+  });
+
+  return comment.id;
+}

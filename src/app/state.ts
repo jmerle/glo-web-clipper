@@ -38,6 +38,8 @@ export interface State {
   cardsLoading: boolean;
   selectedCard: string;
   cardName: string;
+
+  isSaving: boolean;
 }
 
 export const state: State = {
@@ -72,4 +74,6 @@ export const state: State = {
   cardsLoading: false,
   selectedCard: null,
   cardName: null,
+
+  isSaving: false,
 };
