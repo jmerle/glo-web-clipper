@@ -48,7 +48,12 @@ export const ClipperView: Component<{}, State, Actions> = () => (state, actions)
 
         <Checkbox label="Include link to website" onChange={actions.setIncludeLink} />
 
-        <Textarea label="Description (optional)" value={state.description} onChange={actions.setDescription} />
+        <Textarea
+          label="Description (optional)"
+          placeholder="Optional description"
+          value={state.description}
+          onChange={actions.setDescription}
+        />
       </Section>
 
       {state.currentImage !== null && (
