@@ -1,12 +1,15 @@
 pipeline {
     agent {
-        docker "weboaks/node-karma-protractor-chrome:headless"
+        docker {
+            image "weboaks/node-karma-protractor-chrome:headless"
+            args "-v /var/run/docker.sock:/var/run/docker.sock"
+        }
     }
 
     stages {
         stage("Install dependencies") {
             steps {
-                sh "yarn"
+                sh "yarn install --frozen-lockfile"
             }
         }
 
