@@ -22,10 +22,7 @@ export class SelectionClipper extends Clipper {
       const doc = document.documentElement;
 
       if (doc.scrollHeight > window.innerHeight) {
-        const scrollbarWidth = this.getScrollbarWidth();
-        console.log(scrollbarWidth);
-
-        const newSrc = this.cropImage(img, 0, 0, img.width - scrollbarWidth, img.height);
+        const newSrc = this.cropImage(img, 0, 0, img.width - this.getScrollbarWidth(), img.height);
         img = await this.createImage(newSrc);
       }
 

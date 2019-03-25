@@ -1,4 +1,4 @@
-import { Message, MessageAction, sendToBackground, sendToContent } from './utils/messaging';
+import { Message, MessageAction, sendToContent } from './utils/messaging';
 
 function onBrowserActionClicked(tab: browser.tabs.Tab): void {
   sendToContent(tab.id, MessageAction.ToggleClipper);
@@ -11,7 +11,7 @@ async function handleMessage(message: Message | any, sender: browser.runtime.Mes
 
   switch (message.action) {
     case MessageAction.CapturePage:
-      const data = await browser.tabs.captureTab(sender.tab.id, { format: 'png', quality: 100 });
+      const data = await browser.tabs.captureVisibleTab(null, { format: 'png', quality: 100 });
       sendToContent(sender.tab.id, MessageAction.CapturePage, { data });
       break;
   }

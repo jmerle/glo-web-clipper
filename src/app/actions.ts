@@ -82,6 +82,7 @@ export const actions: ActionsType<State, Actions> = {
 
   runClipper: (clipper: Clipper) => async (state: State, act: Actions) => {
     act.setVisible(false);
+    await new Promise(resolve => setTimeout(resolve, 50));
 
     try {
       const image = await clipper.getImage();

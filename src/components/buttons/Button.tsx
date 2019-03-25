@@ -8,7 +8,7 @@ interface Attributes {
 
 export const Button: Component<Attributes> = ({ label, onClick, disabled = false }) =>
   (
-    <button className="gwc-btn gwc-primary-btn" onclick={onClick} disabled={disabled}>
+    <button className="gwc-btn gwc-primary-btn" onclick={() => onClick()} disabled={disabled}>
       {label}
     </button>
   ) as VNode<Attributes>;

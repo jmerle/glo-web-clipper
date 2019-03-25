@@ -9,9 +9,14 @@
   border: 1px solid $btn-primary-border;
   border-radius: 3px;
 
+  box-shadow: none;
   outline: none;
 
   &::placeholder {
     color: lighten($btn-primary-hover, 25%);
+  }
+
+  &:focus {
+    box-shadow: none;
   }
 }
