@@ -8,6 +8,7 @@ import { Section } from '../containers/Section';
 import { Checkbox } from '../form/Checkbox';
 import { Input } from '../form/Input';
 import { Select } from '../form/Select';
+import { Textarea } from '../form/Textarea';
 import { Column, Grid } from '../grid';
 import { ExistingCardIcon, NewCardIcon } from '../icons';
 
@@ -46,6 +47,8 @@ export const ClipperView: Component<{}, State, Actions> = () => (state, actions)
         </Grid>
 
         <Checkbox label="Include link to website" onChange={actions.setIncludeLink} />
+
+        <Textarea label="Description (optional)" value={state.description} onChange={actions.setDescription} />
       </Section>
 
       {state.currentImage !== null && (
@@ -101,7 +104,7 @@ export const ClipperView: Component<{}, State, Actions> = () => (state, actions)
         />
 
         {state.createNewCard ? (
-          <Input label="Card name" onChange={actions.setCardName} initialValue={state.cardName} />
+          <Input label="Card name" onChange={actions.setCardName} value={state.cardName} />
         ) : (
           <Select
             label="Card"

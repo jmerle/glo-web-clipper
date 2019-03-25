@@ -34,8 +34,9 @@ export interface Actions {
 
   runClipper: (clipper: Clipper) => ActionReturnType;
 
-  setIncludeLink: (includeLink: boolean) => ActionReturnType;
   setCurrentImage: (currentImage: string) => ActionReturnType;
+  setIncludeLink: (includeLink: boolean) => ActionReturnType;
+  setDescription: (description: string) => ActionReturnType;
 
   setCreateNewCard: (createNewCard: boolean) => ActionReturnType;
 
@@ -136,8 +137,9 @@ export const actions: ActionsType<State, Actions> = {
     act.setVisible(true);
   },
 
-  setIncludeLink: (includeLink: boolean) => (state: State) => ({ ...state, includeLink }),
   setCurrentImage: (currentImage: string) => (state: State) => ({ ...state, currentImage }),
+  setIncludeLink: (includeLink: boolean) => (state: State) => ({ ...state, includeLink }),
+  setDescription: (description: string) => (state: State) => ({ ...state, description }),
 
   setCreateNewCard: (createNewCard: boolean) => (state: State) => ({ ...state, createNewCard }),
 
@@ -218,35 +220,35 @@ export const actions: ActionsType<State, Actions> = {
   save: () => async (state: State, act: Actions) => {
     act.setIsSaving(true);
 
-    try {
-      const { accessToken, includeLink, currentImage } = state;
-      const boardId = state.selectedBoard;
-      const columnId = state.selectedColumn;
-      let cardId = state.selectedCard;
+    const { accessToken, currentImage, includeLink, description } = state;
+    const boardId = state.selectedBoard;
+    const columnId = state.selectedColumn;
+    let cardId = state.selectedCard;
 
-      if (state.createNewCard) {
-        cardId = await createCard(accessToken, boardId, columnId, state.cardName);
-      }
-
-      const commentParts: string[] = [];
-      const currentUrl = window.location.href;
-
-      if (currentImage !== null) {
-        const response = await fetch(state.currentImage);
-        const blob = await response.blob();
-
-        const attachmentUrl = await createAttachment(accessToken, boardId, cardId, blob);
-        commentParts.push(`![Clipped image from ${currentUrl}](${attachmentUrl})`);
-      }
-
-      if (includeLink) {
-        commentParts.push(`Link: ${currentUrl}`);
-      }
-
-      await createComment(accessToken, boardId, cardId, commentParts.join('\n'));
-    } catch (err) {
-      console.error(err);
+    if (state.createNewCard) {
+      cardId = await createCard(accessToken, boardId, columnId, state.cardName);
     }
+
+    const commentParts: string[] = [];
+    const currentUrl = window.location.href;
+
+    if (currentImage !== null) {
+      const response = await fetch(state.currentImage);
+      const blob = await response.blob();
+
+      const attachmentUrl = await createAttachment(accessToken, boardId, cardId, blob);
+      commentParts.push(`![Clipped image from ${currentUrl}](${attachmentUrl})`);
+    }
+
+    if (includeLink) {
+      commentParts.push(`Link: ${currentUrl}`);
+    }
+
+    if (description && description.trim().length > 0) {
+      commentParts.push(description);
+    }
+
+    await createComment(accessToken, boardId, cardId, commentParts.join('\n\n'));
 
     act.setIsSaving(false);
   },

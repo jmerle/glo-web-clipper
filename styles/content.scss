@@ -23,6 +23,7 @@
   @import 'components/form/input';
   @import 'components/form/select';
   @import 'components/form/status-check';
+  @import 'components/form/textarea';
 
   font-family: 'Open Sans', sans-serif;
   color: $text-normal;
@@ -31,7 +32,7 @@
   box-sizing: border-box;
 
   display: block;
-  position: fixed;
+  position: absolute;
 
   top: 0;
   right: 0;

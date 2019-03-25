@@ -19,8 +19,9 @@ export interface State {
 
   clippers: Clipper[];
 
-  includeLink: boolean;
   currentImage: string;
+  includeLink: boolean;
+  description: string;
 
   createNewCard: boolean;
 
@@ -55,8 +56,9 @@ export const state: State = {
 
   clippers: [new VisiblePageClipper(), new FullPageClipper(), new SelectionClipper()],
 
-  includeLink: false,
   currentImage: null,
+  includeLink: false,
+  description: null,
 
   createNewCard: true,
 

@@ -15,7 +15,7 @@ export const SettingsView: Component<{}, State, Actions> = () => (state, actions
       <Input
         label="Access token"
         placeholder="Put your access token here"
-        initialValue={state.newAccessToken}
+        value={state.newAccessToken}
         password={true}
         onChange={actions.setNewAccessToken}
       />
