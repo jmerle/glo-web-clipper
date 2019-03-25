@@ -28,13 +28,21 @@ async function toggle(): Promise<void> {
 
     main = app(state, actions, view, containerElem);
 
-    config.onAccessTokenChanged(main.setAccessToken);
+    config.onAccessTokenChanged(accessToken => {
+      main.setAccessToken(accessToken);
+
+      if (accessToken !== null) {
+        main.setSettingsVisible(false);
+        main.resetClipper();
+      }
+    });
 
     if (state.accessToken !== null) {
       main.setAccessTokenChecksVisible(true);
       main.setBoardReadState(StatusCheckState.Success);
       main.setBoardWriteState(StatusCheckState.Success);
       main.setNewAccessToken(state.accessToken);
+      main.resetClipper();
     }
   } else {
     main.setVisible(true);

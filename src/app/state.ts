@@ -1,7 +1,9 @@
+import { Board } from '../api/models';
 import { Clipper } from '../clippers/Clipper';
 import { FullPageClipper } from '../clippers/FullPageClipper';
 import { SelectionClipper } from '../clippers/SelectionClipper';
 import { VisiblePageClipper } from '../clippers/VisiblePageClipper';
+import { SelectItem } from '../components/form/Select';
 import { StatusCheckState } from '../components/form/StatusCheck';
 
 export interface State {
@@ -19,6 +21,23 @@ export interface State {
 
   includeLink: boolean;
   currentImage: string;
+
+  createNewCard: boolean;
+
+  rawBoards: Board[];
+
+  boards: SelectItem[];
+  boardsLoading: boolean;
+  selectedBoard: string;
+
+  columns: SelectItem[];
+  columnsLoading: boolean;
+  selectedColumn: string;
+
+  cards: SelectItem[];
+  cardsLoading: boolean;
+  selectedCard: string;
+  cardName: string;
 }
 
 export const state: State = {
@@ -36,4 +55,21 @@ export const state: State = {
 
   includeLink: false,
   currentImage: null,
+
+  createNewCard: true,
+
+  rawBoards: [],
+
+  boards: [],
+  boardsLoading: false,
+  selectedBoard: null,
+
+  columns: [],
+  columnsLoading: false,
+  selectedColumn: null,
+
+  cards: [],
+  cardsLoading: false,
+  selectedCard: null,
+  cardName: null,
 };

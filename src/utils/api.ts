@@ -1,5 +1,16 @@
-import { BoardsApi, CardsApi, ColumnsApi, CommentsApi, Configuration, UsersApi } from '../api';
-import { AttachmentsApi } from '../api/apis';
+import {
+  AttachmentsApi,
+  Board,
+  BoardsApi,
+  Card,
+  CardsApi,
+  ColumnsApi,
+  CommentsApi,
+  Configuration,
+  GetBoardsFieldsEnum,
+  GetCardsByColumnFieldsEnum,
+  UsersApi,
+} from '../api';
 
 function getApiConfiguration(accessToken: string): Configuration {
   return new Configuration({ accessToken: `Bearer ${accessToken}` });
@@ -38,7 +49,7 @@ export async function hasBoardReadScope(accessToken: string): Promise<boolean> {
     await getBoardsApi(accessToken).getBoards({});
     return true;
   } catch (err) {
-    return err.status !== 403;
+    return err.status !== 401 && err.status !== 403;
   }
 }
 
@@ -47,6 +58,40 @@ export async function hasBoardWriteScope(accessToken: string): Promise<boolean> 
     await getBoardsApi(accessToken).createBoard({});
     return true;
   } catch (err) {
-    return err.status !== 403;
+    return err.status !== 401 && err.status !== 403;
   }
+}
+
+export async function getBoards(accessToken: string): Promise<Board[]> {
+  const results: Board[] = [];
+
+  for (let page = 1; results.length === (page - 1) * 100; page++) {
+    const boards = await getBoardsApi(accessToken).getBoards({
+      page,
+      perPage: 100,
+      fields: [GetBoardsFieldsEnum.Name, GetBoardsFieldsEnum.Columns],
+    });
+
+    results.push(...boards);
+  }
+
+  return results;
+}
+
+export async function getCards(accessToken: string, boardId: string, columnId: string): Promise<Card[]> {
+  const results: Card[] = [];
+
+  for (let page = 1; results.length === (page - 1) * 100; page++) {
+    const cards = await getCardsApi(accessToken).getCardsByColumn({
+      boardId,
+      columnId,
+      page,
+      perPage: 100,
+      fields: [GetCardsByColumnFieldsEnum.Name],
+    });
+
+    results.push(...cards);
+  }
+
+  return results;
 }

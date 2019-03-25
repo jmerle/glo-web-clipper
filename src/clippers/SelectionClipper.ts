@@ -19,9 +19,7 @@ export class SelectionClipper extends Clipper {
 
       let img = await this.createImage(imageSrc);
 
-      const doc = document.documentElement;
-
-      if (doc.scrollHeight > window.innerHeight) {
+      if (this.hasScrollbar()) {
         const newSrc = this.cropImage(img, 0, 0, img.width - this.getScrollbarWidth(), img.height);
         img = await this.createImage(newSrc);
       }
@@ -77,6 +75,10 @@ export class SelectionClipper extends Clipper {
     ctx.drawImage(img, x, y, width, height, 0, 0, width, height);
 
     return canvas.toDataURL('image/png');
+  }
+
+  private hasScrollbar(): boolean {
+    return document.documentElement.scrollHeight > window.innerHeight;
   }
 
   // Taken from https://stackoverflow.com/a/13382873

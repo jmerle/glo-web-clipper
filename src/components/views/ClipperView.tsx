@@ -11,63 +11,118 @@ import { Select } from '../form/Select';
 import { Column, Grid } from '../grid';
 import { ExistingCardIcon, NewCardIcon } from '../icons';
 
-export const ClipperView: Component<{}, State, Actions> = () => (state, actions) => (
-  <Box>
-    <Section header="What">
-      <Grid>
-        {state.clippers.map(clipper => (
+export const ClipperView: Component<{}, State, Actions> = () => (state, actions) => {
+  let canSave = true;
+
+  if (state.currentImage === null && !state.includeLink) {
+    canSave = false;
+  }
+
+  if (state.selectedBoard === null || state.selectedColumn === null) {
+    canSave = false;
+  }
+
+  if (state.createNewCard && state.cardName === null) {
+    canSave = false;
+  }
+
+  if (!state.createNewCard && state.selectedCard === null) {
+    canSave = false;
+  }
+
+  return (
+    <Box>
+      <Section header="What">
+        <Grid>
+          {state.clippers.map(clipper => (
+            <Column>
+              <IconButton
+                icon={clipper.getIcon()}
+                label={clipper.getLabel()}
+                onClick={() => actions.runClipper(clipper)}
+              />
+            </Column>
+          ))}
+        </Grid>
+
+        <Checkbox label="Include link to website" onChange={actions.setIncludeLink} />
+      </Section>
+
+      {state.currentImage !== null && (
+        <Section header="Preview">
+          <img src={state.currentImage} alt="Preview" className="gwc-preview" />
+        </Section>
+      )}
+
+      <Section header="Where">
+        <Grid>
           <Column>
             <IconButton
-              icon={clipper.getIcon()}
-              label={clipper.getLabel()}
-              onClick={() => actions.runClipper(clipper)}
+              icon={NewCardIcon}
+              label="New card"
+              onClick={() => actions.setCreateNewCard(true)}
+              selectable={true}
+              selected={state.createNewCard}
             />
           </Column>
-        ))}
-      </Grid>
+          <Column>
+            <IconButton
+              icon={ExistingCardIcon}
+              label="Existing card"
+              onClick={() => actions.setCreateNewCard(false)}
+              selectable={true}
+              selected={!state.createNewCard}
+            />
+          </Column>
+        </Grid>
 
-      <Checkbox label="Include link to website" onChange={actions.setIncludeLink} />
-    </Section>
+        <Select
+          label="Board"
+          options={state.boards}
+          selectedValue={state.selectedBoard}
+          disabled={state.boardsLoading}
+          placeholder={state.boardsLoading ? 'Loading...' : 'Select a board'}
+          onChange={actions.selectBoard}
+        />
 
-    {state.currentImage !== null && (
-      <Section header="Preview">
-        <img src={state.currentImage} alt="Preview" className="gwc-preview" />
-      </Section>
-    )}
+        <Select
+          label="Column"
+          options={state.columns}
+          selectedValue={state.selectedColumn}
+          disabled={state.columnsLoading || state.selectedBoard === null}
+          placeholder={
+            state.columnsLoading
+              ? 'Loading...'
+              : state.selectedBoard === null
+              ? 'Select a board first'
+              : 'Select a column'
+          }
+          onChange={actions.selectColumn}
+        />
 
-    <Section header="Where">
-      <Grid>
-        <Column>
-          <IconButton icon={NewCardIcon} label="New card" onClick={console.log} selectable={true} selected={true} />
-        </Column>
-        <Column>
-          <IconButton
-            icon={ExistingCardIcon}
-            label="Existing card"
-            onClick={console.log}
-            selectable={true}
-            selected={false}
+        {state.createNewCard ? (
+          <Input label="Card name" onChange={actions.setCardName} initialValue={state.cardName} />
+        ) : (
+          <Select
+            label="Card"
+            options={state.cards}
+            selectedValue={state.selectedCard}
+            disabled={state.cardsLoading || state.selectedColumn === null}
+            placeholder={
+              state.cardsLoading
+                ? 'Loading...'
+                : state.selectedColumn === null
+                ? 'Select a column first'
+                : 'Select a card'
+            }
+            onChange={actions.setSelectedCard}
           />
-        </Column>
-      </Grid>
+        )}
+      </Section>
 
-      <Select
-        label="Board"
-        placeholder="Select a board"
-        options={[...new Array(5)].map((v, i) => ({ value: `board-${i + 1}`, label: `Board ${i + 1}` }))}
-      />
-
-      <Select
-        label="Column"
-        placeholder="Select a column"
-        options={[...new Array(5)].map((v, i) => ({ value: `column-${i + 1}`, label: `Column ${i + 1}` }))}
-      />
-
-      <Input label="Card name" onChange={console.log} />
-    </Section>
-
-    <Section header="Actions">
-      <Button label="Save" onClick={console.log} />
-    </Section>
-  </Box>
-);
+      <Section header="Actions">
+        <Button label="Save" disabled={!canSave} onClick={console.log} />
+      </Section>
+    </Box>
+  );
+};
