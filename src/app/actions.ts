@@ -73,6 +73,10 @@ export const actions: ActionsType<State, Actions> = {
 
   resetClipper: () => async (state: State, act: Actions) => {
     if (state.accessToken !== null && !state.settingsVisible) {
+      act.setSelectedBoard(null);
+      act.setSelectedColumn(null);
+      act.setSelectedCard(null);
+
       act.loadBoards();
     }
   },
@@ -161,15 +165,24 @@ export const actions: ActionsType<State, Actions> = {
   loadBoards: () => async (state: State, act: Actions) => {
     act.setBoardsLoading(true);
 
-    const rawBoards = await getBoards(state.accessToken);
-    act.setRawBoards(rawBoards);
+    try {
+      const rawBoards = await getBoards(state.accessToken);
+      act.setRawBoards(rawBoards);
 
-    act.setBoards(
-      rawBoards.map(board => ({
-        value: board.id,
-        label: board.name,
-      })),
-    );
+      act.setBoards(
+        rawBoards.map(board => ({
+          value: board.id,
+          label: board.name,
+        })),
+      );
+    } catch (err) {
+      if (err.status === 401 || err.status === 403) {
+        console.error("The access token is no longer valid or doesn't have the board:read and the board:write scopes");
+        await config.setAccessToken(null);
+      } else {
+        console.error(err);
+      }
+    }
 
     act.setSelectedBoard(null);
     act.setBoardsLoading(false);
@@ -193,13 +206,22 @@ export const actions: ActionsType<State, Actions> = {
   loadCards: () => async (state: State, act: Actions) => {
     act.setCardsLoading(true);
 
-    const cards = await getCards(state.accessToken, state.selectedBoard, state.selectedColumn);
-    act.setCards(
-      cards.map(card => ({
-        value: card.id,
-        label: card.name,
-      })),
-    );
+    try {
+      const cards = await getCards(state.accessToken, state.selectedBoard, state.selectedColumn);
+      act.setCards(
+        cards.map(card => ({
+          value: card.id,
+          label: card.name,
+        })),
+      );
+    } catch (err) {
+      if (err.status === 401 || err.status === 403) {
+        console.error("The access token is no longer valid or doesn't have the board:read and the board:write scopes");
+        await config.setAccessToken(null);
+      } else {
+        console.error(err);
+      }
+    }
 
     act.setSelectedCard(null);
     act.setCardsLoading(false);
@@ -220,35 +242,44 @@ export const actions: ActionsType<State, Actions> = {
   save: () => async (state: State, act: Actions) => {
     act.setIsSaving(true);
 
-    const { accessToken, currentImage, includeLink, description } = state;
-    const boardId = state.selectedBoard;
-    const columnId = state.selectedColumn;
-    let cardId = state.selectedCard;
+    try {
+      const { accessToken, currentImage, includeLink, description } = state;
+      const boardId = state.selectedBoard;
+      const columnId = state.selectedColumn;
+      let cardId = state.selectedCard;
 
-    if (state.createNewCard) {
-      cardId = await createCard(accessToken, boardId, columnId, state.cardName);
+      if (state.createNewCard) {
+        cardId = await createCard(accessToken, boardId, columnId, state.cardName);
+      }
+
+      const commentParts: string[] = [];
+      const currentUrl = window.location.href;
+
+      if (currentImage !== null) {
+        const response = await fetch(state.currentImage);
+        const blob = await response.blob();
+
+        const attachmentUrl = await createAttachment(accessToken, boardId, cardId, blob);
+        commentParts.push(`![Clipped image from ${currentUrl}](${attachmentUrl})`);
+      }
+
+      if (includeLink) {
+        commentParts.push(`Link: ${currentUrl}`);
+      }
+
+      if (description && description.trim().length > 0) {
+        commentParts.push(description);
+      }
+
+      await createComment(accessToken, boardId, cardId, commentParts.join('\n\n'));
+    } catch (err) {
+      if (err.status === 401 || err.status === 403) {
+        console.error("The access token is no longer valid or doesn't have the board:read and the board:write scopes");
+        await config.setAccessToken(null);
+      } else {
+        console.error(err);
+      }
     }
-
-    const commentParts: string[] = [];
-    const currentUrl = window.location.href;
-
-    if (currentImage !== null) {
-      const response = await fetch(state.currentImage);
-      const blob = await response.blob();
-
-      const attachmentUrl = await createAttachment(accessToken, boardId, cardId, blob);
-      commentParts.push(`![Clipped image from ${currentUrl}](${attachmentUrl})`);
-    }
-
-    if (includeLink) {
-      commentParts.push(`Link: ${currentUrl}`);
-    }
-
-    if (description && description.trim().length > 0) {
-      commentParts.push(description);
-    }
-
-    await createComment(accessToken, boardId, cardId, commentParts.join('\n\n'));
 
     act.setIsSaving(false);
   },
