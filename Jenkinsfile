@@ -5,27 +5,39 @@ pipeline {
 
     stages {
         stage("Install dependencies") {
-            sh "yarn"
+            steps {
+                sh "yarn"
+            }
         }
 
         stage("Generate icons") {
-            sh "yarn generate:icons"
+            steps {
+                sh "yarn generate:icons"
+            }
         }
 
         stage("Generate API client") {
-            sh "yarn generate:api"
+            steps {
+                sh "yarn generate:api"
+            }
         }
 
         stage("Build") {
-            sh "yarn build"
+            steps {
+                sh "yarn build"
+            }
         }
 
         stage("Lint code") {
-            sh "yarn lint:code"
+            steps {
+                sh "yarn lint:code"
+            }
         }
 
         stage("Lint package") {
-            sh "yarn lint:package"
+            steps {
+                sh "yarn lint:package"
+            }
         }
     }
 }
