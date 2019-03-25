@@ -23,6 +23,7 @@
     "dev:chrome": "yarn build && concurrently 'yarn start:chrome' 'yarn watch' -n chrome,webpack -c blue,yellow --kill-others"
   },
   "dependencies": {
+    "croppr": "^2.3.1",
     "hyperapp": "^1.2.9",
     "merge-images": "^1.1.0",
     "normalize.css": "^8.0.1",
