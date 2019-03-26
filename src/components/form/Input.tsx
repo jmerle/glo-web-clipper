@@ -9,16 +9,25 @@ interface Attributes {
   value?: string;
 }
 
-export const Input: Component<Attributes> = ({ label, onChange, placeholder = label, password = false, value }) =>
-  (
+export const Input: Component<Attributes> = ({ label, onChange, placeholder = label, password = false, value }) => {
+  const normalizedLabel = label
+    .replace(/ /g, '-')
+    .replace(/[^a-z-]/gi, '')
+    .toLowerCase();
+
+  const id = `gwc-input-${normalizedLabel}`;
+
+  return (
     <FormSection>
-      <label>{label}</label>
+      <label for={id}>{label}</label>
       <input
         type={password ? 'password' : 'text'}
         class="gwc-input"
+        id={id}
         value={value}
         placeholder={placeholder}
         oninput={(ev: any) => onChange(ev.target.value)}
       />
     </FormSection>
   ) as VNode<Attributes>;
+};

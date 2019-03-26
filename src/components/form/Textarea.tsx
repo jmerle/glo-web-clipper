@@ -8,12 +8,26 @@ interface Attributes {
   value?: string;
 }
 
-export const Textarea: Component<Attributes> = ({ label, onChange, placeholder = label, value }) =>
-  (
+export const Textarea: Component<Attributes> = ({ label, onChange, placeholder = label, value }) => {
+  const normalizedLabel = label
+    .replace(/ /g, '-')
+    .replace(/[^a-z-]/gi, '')
+    .toLowerCase();
+
+  const id = `gwc-input-${normalizedLabel}`;
+
+  return (
     <FormSection>
-      <label>{label}</label>
-      <textarea class="gwc-textarea" rows="3" placeholder={placeholder} oninput={(ev: any) => onChange(ev.target.value)}>
+      <label for={id}>{label}</label>
+      <textarea
+        class="gwc-textarea"
+        rows="3"
+        id={id}
+        placeholder={placeholder}
+        oninput={(ev: any) => onChange(ev.target.value)}
+      >
         {value}
       </textarea>
     </FormSection>
   ) as VNode<Attributes>;
+};

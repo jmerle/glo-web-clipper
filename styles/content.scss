@@ -1,7 +1,5 @@
 @import '~croppr/dist/croppr.css';
 
-@import 'fonts';
-
 #glo-web-clipper {
   @import 'variables';
 
@@ -25,7 +23,8 @@
   @import 'components/form/status-check';
   @import 'components/form/textarea';
 
-  font-family: 'Open Sans', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol';
   color: $text-normal;
   font-size: 14px;
 
