@@ -18,7 +18,7 @@ Saving options:
 - Add the clipped content to an existing card as a comment.
 
 ## Running locally
-The following commands can be used to start working on Competitive Companion locally. Additionally, make sure you got [Node.js](https://nodejs.org/en/) and [Yarn](https://yarnpkg.com/en/) installed.
+The following commands can be used to start working on Glo Web Clipper locally. Additionally, make sure you got [Node.js](https://nodejs.org/en/) and [Yarn](https://yarnpkg.com/en/) installed.
 
 ```bash
 # Clone the repository
@@ -54,7 +54,7 @@ yarn package
 yarn dev:firefox
 
 # Does the same as dev:firefox but with Chrome, with the exception that the extension is not automatically reloaded
-# You'll have to manually go to chrome://extensions and click on the reload button on the Competitive Companion entry
+# You'll have to manually go to chrome://extensions and click on the reload button on the Glo Web Clipper entry
 yarn dev:chrome
 ```
 
