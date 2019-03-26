@@ -13,8 +13,8 @@ export const SettingsView: Component<{}, State, Actions> = () => (state, actions
   <Box showSettingsButton={false}>
     <Section header="Settings">
       <Input
-        label="Access token"
-        placeholder="Put your access token here"
+        label="Personal access token"
+        placeholder="Put your personal access token here"
         value={state.newAccessToken}
         password={true}
         onChange={actions.setNewAccessToken}
@@ -32,7 +32,8 @@ export const SettingsView: Component<{}, State, Actions> = () => (state, actions
       )}
 
       <p>
-        An access token is required to retrieve information about your boards and create new cards. Please create one at{' '}
+        A personal access token is required to retrieve information about your boards and create new cards. Please
+        create one at{' '}
         <a href="https://app.gitkraken.com/pats/new" target="_blank">
           app.gitkraken.com/pats/new
         </a>{' '}
