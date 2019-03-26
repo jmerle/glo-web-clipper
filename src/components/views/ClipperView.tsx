@@ -130,6 +130,12 @@ export const ClipperView: Component<{}, State, Actions> = () => (state, actions)
 
       <Section header="Actions">
         <Button label="Save" disabled={!canSave} onClick={actions.save} />
+
+        {state.savedCardUrl && (
+          <a href={state.savedCardUrl} target="_blank" class="gwc-open-card-link">
+            Open card in new tab
+          </a>
+        )}
       </Section>
     </Box>
   );

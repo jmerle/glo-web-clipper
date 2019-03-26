@@ -43,6 +43,7 @@ export interface Actions {
 
   setRawBoards: (boardsData: Board[]) => ActionReturnType;
   setCardsDirty: (cardsDirty: boolean) => ActionReturnType;
+  setSavedCardUrl: (savedCardUrl: string) => ActionReturnType;
 
   setBoards: (boards: SelectItem[]) => ActionReturnType;
   setBoardsLoading: (boardsLoading: boolean) => ActionReturnType;
@@ -75,6 +76,8 @@ export const actions: ActionsType<State, Actions> = {
 
   resetClipper: () => async (state: State, act: Actions) => {
     if (state.accessToken !== null && !state.settingsVisible) {
+      act.setSavedCardUrl(null);
+
       act.setSelectedBoard(null);
       act.setSelectedColumn(null);
       act.setSelectedCard(null);
@@ -158,6 +161,7 @@ export const actions: ActionsType<State, Actions> = {
 
   setRawBoards: (rawBoards: boolean) => (state: State) => ({ ...state, rawBoards }),
   setCardsDirty: (cardsDirty: boolean) => (state: State) => ({ ...state, cardsDirty }),
+  setSavedCardUrl: (savedCardUrl: string) => (state: State) => ({ ...state, savedCardUrl }),
 
   setBoards: (boards: SelectItem[]) => (state: State) => ({ ...state, boards }),
   setBoardsLoading: (boardsLoading: boolean) => (state: State) => ({ ...state, boardsLoading }),
@@ -292,6 +296,8 @@ export const actions: ActionsType<State, Actions> = {
       }
 
       await createComment(accessToken, boardId, cardId, commentParts.join('\n\n'));
+
+      act.setSavedCardUrl(`https://app.gitkraken.com/glo/board/${boardId}/card/${cardId}`);
     } catch (err) {
       if (err.status === 401 || err.status === 403) {
         console.error("The access token is no longer valid or doesn't have the board:read and the board:write scopes");

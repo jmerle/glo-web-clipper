@@ -45,6 +45,12 @@
 
   a {
     color: $accent;
+
+    &.gwc-open-card-link {
+      display: block;
+      text-align: center;
+      padding: 5px 0;
+    }
   }
 
   code {
