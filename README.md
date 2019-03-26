@@ -66,11 +66,11 @@ Node.js: 10.15.0
 Yarn: 1.15.2
 
 Third-party libraries that can be found in the extension:  
-- [croppr 2.3.1](https://github.com/jamesssooi/Croppr.js/tree/v2.3.1/dist) (the css is in [styles/components/_croppr.scss](styles/components/_croppr.scss))
+- [croppr 2.3.1](https://github.com/jamesssooi/Croppr.js/tree/v2.3.1/dist) (the css can be found at the top of [styles/components/_croppr.scss](styles/components/_croppr.scss))
 - [hyperapp 1.2.9](https://github.com/jorgebucaran/hyperapp/blob/1.2.9/src/index.js)
 - [merge-images 1.1.0](https://github.com/lukechilds/merge-images/blob/v1.1.0/src/index.js)
 - [webextension-polyfill 0.4.0](https://github.com/mozilla/webextension-polyfill/blob/0.4.0/src/browser-polyfill.js)
-- Modified version of [modern-normalize 0.5.0](https://github.com/sindresorhus/modern-normalize/blob/v0.5.0/modern-normalize.css) in [styles/utils/_normalize.scss](styles/utils/_normalize.scss)
+- A modified version of [modern-normalize 0.5.0](https://github.com/sindresorhus/modern-normalize/blob/v0.5.0/modern-normalize.css) in [styles/utils/_normalize.scss](styles/utils/_normalize.scss)
 - [Reset CSS 2.0](https://meyerweb.com/eric/tools/css/reset/) in [styles/utils/_reset.scss](styles/utils/_reset.scss)
 
 Package the extension by `cd`'ing into the source code submission directory, installing the dependencies with `yarn` and packaging with `yarn package`. The result can be found in the dist/ directory.
