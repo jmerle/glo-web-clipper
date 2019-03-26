@@ -2,7 +2,7 @@
 
 [![Build Status](https://jenkins.jmerle.dev/buildStatus/icon?job=glo-web-clipper%2Fmaster)](https://jenkins.jmerle.dev/job/glo-web-clipper/job/master/)
 
-Clip anything, describe it and save it to a GitKraken Glo card.
+Clip it, describe it and save it to a GitKraken Glo card.
 
 Use Glo Web Clipper to easily capture snippets of the web to a new or existing GitKraken Glo card. Optionally, you can also include a link to the website you're on and write a description about the clipped content or the link.
 

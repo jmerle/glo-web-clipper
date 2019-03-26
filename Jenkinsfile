@@ -24,7 +24,7 @@ pipeline {
 
         stage("Build") {
             steps {
-                sh "yarn build"
+                sh "yarn build:firefox"
             }
         }
 

@@ -16,6 +16,12 @@ function transformManifest(content: string): string {
   manifest.author = packageData.author;
   manifest.homepage_url = packageData.repository;
 
+  if (process.env.BROWSER === 'chrome') {
+    manifest.permissions.push('activeTab', 'https://gloapi.gitkraken.com/*');
+  } else {
+    manifest.permissions.push('<all_urls>');
+  }
+
   return JSON.stringify(manifest, null, 2);
 }
 
