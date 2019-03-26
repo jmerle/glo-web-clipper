@@ -64,7 +64,7 @@ Node.js: 10.15.0
 Yarn: 1.15.2
 
 Third-party libraries that can be found in the extension:  
-- [croppr 2.3.1](https://github.com/jamesssooi/Croppr.js/tree/v2.3.1/dist)
+- [croppr 2.3.1](https://github.com/jamesssooi/Croppr.js/tree/v2.3.1/dist) (the css is in [styles/components/_croppr.scss](styles/components/_croppr.scss))
 - [hyperapp 1.2.9](https://github.com/jorgebucaran/hyperapp/blob/1.2.9/src/index.js)
 - [merge-images 1.1.0](https://github.com/lukechilds/merge-images/blob/v1.1.0/src/index.js)
 - [webextension-polyfill 0.4.0](https://github.com/mozilla/webextension-polyfill/blob/0.4.0/src/browser-polyfill.js)
