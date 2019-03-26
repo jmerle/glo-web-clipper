@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        docker "weboaks/node-karma-protractor-chrome:headless"
+        dockerfile true
     }
 
     stages {
@@ -17,8 +17,6 @@ pipeline {
         }
 
         stage("Generate API client") {
-            agent any
-
             steps {
                 sh "yarn generate:api"
             }

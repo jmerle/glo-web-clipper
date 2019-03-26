@@ -61,6 +61,11 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
+"@openapitools/openapi-generator-cli@^0.0.8-4.0.0-beta2":
+  version "0.0.8-4.0.0-beta2"
+  resolved "https://registry.yarnpkg.com/@openapitools/openapi-generator-cli/-/openapi-generator-cli-0.0.8-4.0.0-beta2.tgz#a4d1c566c21a705b2c4c9dacfd4fcb682b60fab3"
+  integrity sha512-o+4dbwST1qHOpc0zcJJL+XVQ356ZygNSwh0VBV0gef0rgLLvwVxziQH3N2AHzbTyrfltaK6LvCiGYi5HLrqZKw==
+
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@samverschueren/stream-to-observable/-/stream-to-observable-0.3.0.tgz#ecdf48d532c58ea477acfcab80348424f8d0662f"

@@ -204,22 +204,7 @@ const operationIds: { [path: string]: { [method: string]: string } } = {
 
     console.log('Generating new API client');
 
-    await exec('docker', [
-      'run',
-      '--rm',
-      '-u',
-      '1000',
-      '-v',
-      `${path.resolve(__dirname, '../')}:/local`,
-      'openapitools/openapi-generator-cli:latest',
-      'generate',
-      '-i',
-      '/local/api.json',
-      '-g',
-      'typescript-fetch',
-      '-o',
-      '/local/src/api',
-    ]);
+    await exec('yarn', ['openapi-generator', 'generate', '-i', 'api.json', '-g', 'typescript-fetch', '-o', 'src/api']);
 
     // Ignore "implicitly has an 'any' return type" errors in the generated files
     const runtimePath = path.resolve(apiDirectory, 'runtime.ts');

@@ -30,6 +30,7 @@
     "webextension-polyfill": "^0.4.0"
   },
   "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^0.0.8-4.0.0-beta2",
     "@types/copy-webpack-plugin": "^4.4.3",
     "@types/execa": "^0.9.0",
     "@types/fs-extra": "^5.0.5",
