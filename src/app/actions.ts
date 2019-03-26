@@ -39,8 +39,10 @@ export interface Actions {
   setDescription: (description: string) => ActionReturnType;
 
   setCreateNewCard: (createNewCard: boolean) => ActionReturnType;
+  changeCreateNewCard: (createNewCard: boolean) => ActionReturnType;
 
   setRawBoards: (boardsData: Board[]) => ActionReturnType;
+  setCardsDirty: (cardsDirty: boolean) => ActionReturnType;
 
   setBoards: (boards: SelectItem[]) => ActionReturnType;
   setBoardsLoading: (boardsLoading: boolean) => ActionReturnType;
@@ -146,8 +148,16 @@ export const actions: ActionsType<State, Actions> = {
   setDescription: (description: string) => (state: State) => ({ ...state, description }),
 
   setCreateNewCard: (createNewCard: boolean) => (state: State) => ({ ...state, createNewCard }),
+  changeCreateNewCard: (createNewCard: boolean) => (state: State, act: Actions) => {
+    if (!createNewCard && state.cardsDirty && state.selectedBoard !== null && state.selectedColumn !== null) {
+      act.loadCards();
+    }
+
+    act.setCreateNewCard(createNewCard);
+  },
 
   setRawBoards: (rawBoards: boolean) => (state: State) => ({ ...state, rawBoards }),
+  setCardsDirty: (cardsDirty: boolean) => (state: State) => ({ ...state, cardsDirty }),
 
   setBoards: (boards: SelectItem[]) => (state: State) => ({ ...state, boards }),
   setBoardsLoading: (boardsLoading: boolean) => (state: State) => ({ ...state, boardsLoading }),
@@ -164,6 +174,9 @@ export const actions: ActionsType<State, Actions> = {
 
   loadBoards: () => async (state: State, act: Actions) => {
     act.setBoardsLoading(true);
+    act.setSelectedBoard(null);
+    act.setSelectedColumn(null);
+    act.setSelectedCard(null);
 
     try {
       const rawBoards = await getBoards(state.accessToken);
@@ -184,12 +197,14 @@ export const actions: ActionsType<State, Actions> = {
       }
     }
 
-    act.setSelectedBoard(null);
+    act.setCardsDirty(true);
     act.setBoardsLoading(false);
   },
 
   loadColumns: () => async (state: State, act: Actions) => {
     act.setColumnsLoading(true);
+    act.setSelectedColumn(null);
+    act.setSelectedCard(null);
 
     const board = state.rawBoards.find(b => b.id === state.selectedBoard);
     act.setColumns(
@@ -199,12 +214,13 @@ export const actions: ActionsType<State, Actions> = {
       })),
     );
 
-    act.setSelectedColumn(null);
+    act.setCardsDirty(true);
     act.setColumnsLoading(false);
   },
 
   loadCards: () => async (state: State, act: Actions) => {
     act.setCardsLoading(true);
+    act.setSelectedCard(null);
 
     try {
       const cards = await getCards(state.accessToken, state.selectedBoard, state.selectedColumn);
@@ -223,7 +239,7 @@ export const actions: ActionsType<State, Actions> = {
       }
     }
 
-    act.setSelectedCard(null);
+    act.setCardsDirty(false);
     act.setCardsLoading(false);
   },
 
@@ -234,7 +250,11 @@ export const actions: ActionsType<State, Actions> = {
 
   selectColumn: (columnId: string) => async (state: State, act: Actions) => {
     act.setSelectedColumn(columnId);
-    act.loadCards();
+    act.setCardsDirty(true);
+
+    if (!state.createNewCard) {
+      act.loadCards();
+    }
   },
 
   setIsSaving: (isSaving: boolean) => (state: State) => ({ ...state, isSaving }),

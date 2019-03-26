@@ -68,7 +68,7 @@ export const ClipperView: Component<{}, State, Actions> = () => (state, actions)
             <IconButton
               icon={NewCardIcon}
               label="New card"
-              onClick={() => actions.setCreateNewCard(true)}
+              onClick={() => actions.changeCreateNewCard(true)}
               selectable={true}
               selected={state.createNewCard}
             />
@@ -77,7 +77,7 @@ export const ClipperView: Component<{}, State, Actions> = () => (state, actions)
             <IconButton
               icon={ExistingCardIcon}
               label="Existing card"
-              onClick={() => actions.setCreateNewCard(false)}
+              onClick={() => actions.changeCreateNewCard(false)}
               selectable={true}
               selected={!state.createNewCard}
             />

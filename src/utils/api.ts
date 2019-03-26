@@ -107,6 +107,8 @@ export async function createCard(
     cardWithColumnId: {
       columnId,
       name,
+      assignees: [],
+      labels: [],
     },
   });
 

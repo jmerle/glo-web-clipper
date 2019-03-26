@@ -26,6 +26,7 @@ export interface State {
   createNewCard: boolean;
 
   rawBoards: Board[];
+  cardsDirty: boolean;
 
   boards: SelectItem[];
   boardsLoading: boolean;
@@ -63,6 +64,7 @@ export const state: State = {
   createNewCard: true,
 
   rawBoards: [],
+  cardsDirty: false,
 
   boards: [],
   boardsLoading: false,
