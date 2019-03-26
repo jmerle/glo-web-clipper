@@ -6,12 +6,14 @@ Clip anything, describe it and save it to a GitKraken Glo card.
 
 Use Glo Web Clipper to easily capture snippets of the web to a new or existing GitKraken Glo card. Optionally, you can also include a link to the website you're on and write a description about the clipped content or the link.
 
-What to clip:
+Clipping options:
 - "Visible page" will take a screenshot of everything that's currently visible.
 - "Full page" will take a screenshot of the full page, including everything that is not visible.
 - "Selection" will allow you to freely select a rectangle to clip on the currently visible page.
+- Include a link to the current url
+- Add a description
 
-Where to save:
+Saving options:
 - Create a new card using Glo Web Clipper and attach the clipped content as a comment on the newly created card.
 - Add the clipped content to an existing card as a comment.
 
