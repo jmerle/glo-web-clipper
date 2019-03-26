@@ -1,6 +1,19 @@
 # Glo Web Clipper
 
-A web clipper for GitKraken Glo Boards. Glo Web Clipper makes it easy to clip all or part of a website to a new or an existing card on a GitKraken Glo Board.
+[![Build Status](https://jenkins.jmerle.dev/buildStatus/icon?job=glo-web-clipper%2Fmaster)](https://jenkins.jmerle.dev/job/glo-web-clipper/job/master/)
+
+Clip anything, describe it and save it to a GitKraken Glo card.
+
+Use Glo Web Clipper to easily capture snippets of the web to a new or existing GitKraken Glo card. Optionally, you can also include a link to the website you're on and write a description about the clipped content or the link.
+
+What to clip:
+- "Visible page" will take a screenshot of everything that's currently visible.
+- "Full page" will take a screenshot of the full page, including everything that is not visible.
+- "Selection" will allow you to freely select a rectangle to clip on the currently visible page.
+
+Where to save:
+- Create a new card using Glo Web Clipper and attach the clipped content as a comment on the newly created card.
+- Add the clipped content to an existing card as a comment.
 
 ## Running locally
 The following commands can be used to start working on Competitive Companion locally. Additionally, make sure you got [Node.js](https://nodejs.org/en/) and [Yarn](https://yarnpkg.com/en/) installed.
@@ -48,9 +61,14 @@ The information provided below is meant for Mozilla volunteers.
 
 Software versions used:  
 Node.js: 10.15.0  
-Yarn: 1.13.0
+Yarn: 1.15.2
 
 Third-party libraries that can be found in the extension:  
+- [croppr 2.3.1](https://github.com/jamesssooi/Croppr.js/tree/v2.3.1/dist)
+- [hyperapp 1.2.9](https://github.com/jorgebucaran/hyperapp/blob/1.2.9/src/index.js)
+- [merge-images 1.1.0](https://github.com/lukechilds/merge-images/blob/v1.1.0/src/index.js)
 - [webextension-polyfill 0.4.0](https://github.com/mozilla/webextension-polyfill/blob/0.4.0/src/browser-polyfill.js)
+- Modified version of [modern-normalize 0.5.0](https://github.com/sindresorhus/modern-normalize/blob/v0.5.0/modern-normalize.css) in [styles/utils/_normalize.scss](styles/utils/_normalize.scss)
+- [Reset CSS 2.0](https://meyerweb.com/eric/tools/css/reset/) in [styles/utils/_reset.scss](styles/utils/_reset.scss)
 
 Package the extension by `cd`'ing into the source code submission directory, installing the dependencies with `yarn` and packaging with `yarn package`. The result can be found in the dist/ directory.
