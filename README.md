@@ -1,5 +1,9 @@
 # Glo Web Clipper
 
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/ikfmgfnieohkknpbninokpleohjpbjbl.svg)](https://chrome.google.com/webstore/detail/glo-web-clipper/ikfmgfnieohkknpbninokpleohjpbjbl)
+[![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/ikfmgfnieohkknpbninokpleohjpbjbl.svg)](https://chrome.google.com/webstore/detail/glo-web-clipper/ikfmgfnieohkknpbninokpleohjpbjbl)  
+[![Mozilla Add-on](https://img.shields.io/amo/v/glo-web-clipper.svg)](https://addons.mozilla.org/en-US/firefox/addon/glo-web-clipper/)
+[![Mozilla Add-on Users](https://img.shields.io/amo/users/glo-web-clipper.svg)](https://addons.mozilla.org/en-US/firefox/addon/glo-web-clipper/)  
 [![Build Status](https://jenkins.jmerle.dev/buildStatus/icon?job=glo-web-clipper%2Fmaster)](https://jenkins.jmerle.dev/job/glo-web-clipper/job/master/)
 
 Clip it, describe it and save it to a GitKraken Glo card.
@@ -44,7 +48,7 @@ yarn watch
 # Lint the extension for possible mistakes
 yarn lint
 
-# Package the extension to a zip file
+# Package the extension to a zip file for Chrome and a zip file for Firefox
 yarn package
 
 # Launch a Firefox instance with Glo Web Clipper loaded into a temporary profile
