@@ -49,5 +49,13 @@
     },
     "default_title": "Clip to Glo",
     "browser_style": false
+  },
+
+  "key": "ikfmgfnieohkknpbninokpleohjpbjbl",
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{abc76e94-79e2-4dfe-9bc1-be0335eb2d26}"
+    }
   }
 }

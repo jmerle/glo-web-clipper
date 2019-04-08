@@ -18,8 +18,10 @@ function transformManifest(content: string): string {
 
   if (process.env.BROWSER === 'chrome') {
     manifest.permissions.push('activeTab', 'https://gloapi.gitkraken.com/*');
+    delete manifest.browser_specific_settings;
   } else {
     manifest.permissions.push('<all_urls>');
+    delete manifest.key;
   }
 
   return JSON.stringify(manifest, null, 2);

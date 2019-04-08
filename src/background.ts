@@ -1,19 +1,13 @@
 import { Message, MessageAction, sendToContent } from './utils/messaging';
 
 const isChrome = window.navigator.userAgent.toLowerCase().includes('chrome');
+const forbiddenUrlPrefixes: string[] = [];
 
-// Taken from Evernote Web Clipper
-const forbiddenUrlPrefixes = [
-  'https://safari-extensions.apple.com',
-  'ms-appx-web://',
-  'https://addons.mozilla.org/',
-  'chrome://',
-  'about:',
-  'https://addons.opera.com',
-  'https://chrome.google.com/extensions',
-  'https://chrome.google.com/webstore',
-  'https://www.msn.com/spartan/ntp',
-];
+if (isChrome) {
+  forbiddenUrlPrefixes.push('chrome://', 'https://chrome.google.com/extensions', 'https://chrome.google.com/webstore');
+} else {
+  forbiddenUrlPrefixes.push('about:', 'https://addons.mozilla.org/');
+}
 
 function onBrowserActionClicked(tab: browser.tabs.Tab): void {
   if (tab.url && forbiddenUrlPrefixes.some(prefix => tab.url.startsWith(prefix))) {
@@ -21,7 +15,7 @@ function onBrowserActionClicked(tab: browser.tabs.Tab): void {
 
     console.error(message);
 
-    // alert'ing in the background script only shows an alert message on Chrome
+    // alert() in the background script only shows an alert message on Chrome
     if (isChrome) {
       alert(message);
     }
