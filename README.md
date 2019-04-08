@@ -40,10 +40,7 @@ yarn generate
 # Decide what you want to do next
 
 # Build the code to the build/ directory
-yarn build
-
-# Build the code automatically when the source changes
-yarn watch
+yarn build:firefox
 
 # Lint the extension for possible mistakes
 yarn lint
