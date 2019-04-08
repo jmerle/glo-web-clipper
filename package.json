@@ -1,7 +1,7 @@
 {
   "name": "glo-web-clipper",
   "productName": "Glo Web Clipper",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A web clipper for GitKraken Glo boards.",
   "repository": "https://github.com/jmerle/glo-web-clipper",
   "author": "Jasper van Merle",
