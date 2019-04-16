@@ -2,13 +2,21 @@ kind: pipeline
 name: default
 
 steps:
-  - name: build
+  - name: install
+    image: node:lts
+    commands:
+      - yarn install --frozen-lockfile
+  - name: generate-icons
     image: weboaks/node-karma-protractor-chrome:headless
     commands:
-      - apt update && apt install -y openjdk-8-jre-headless
-      - yarn install --frozen-lockfile
       - yarn generate:icons
+  - name: generate-api
+    image: timbru31/java-node:8-alpine
+    commands:
       - yarn generate:api
+  - name: build
+    image: node:lts
+    commands:
       - yarn build:firefox
       - yarn lint:code
       - yarn lint:package
