@@ -22,6 +22,7 @@ const renderAsync = util.promisify(svgexport.render);
 
     console.log('Removing existing icons');
     await fs.remove(path.resolve(__dirname, '../icons'));
+    await fs.mkdirp(path.resolve(__dirname, '../icons'));
 
     console.log(`Creating ${sizes.length} icons based on ${inputPath} with the following sizes: ${sizes.join(', ')}`);
     await renderAsync(options);
