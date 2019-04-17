@@ -4,7 +4,7 @@
 [![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/ikfmgfnieohkknpbninokpleohjpbjbl.svg)](https://chrome.google.com/webstore/detail/glo-web-clipper/ikfmgfnieohkknpbninokpleohjpbjbl)  
 [![Mozilla Add-on](https://img.shields.io/amo/v/glo-web-clipper.svg)](https://addons.mozilla.org/en-US/firefox/addon/glo-web-clipper/)
 [![Mozilla Add-on Users](https://img.shields.io/amo/users/glo-web-clipper.svg)](https://addons.mozilla.org/en-US/firefox/addon/glo-web-clipper/)  
-[![Build Status](https://jenkins.jmerle.dev/buildStatus/icon?job=glo-web-clipper%2Fmaster)](https://jenkins.jmerle.dev/job/glo-web-clipper/job/master/)
+[![Build Status](https://drone.jmerle.dev/api/badges/jmerle/glo-web-clipper/status.svg)](https://drone.jmerle.dev/jmerle/glo-web-clipper)
 
 Clip it, describe it and save it to a GitKraken Glo card.
 
