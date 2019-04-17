@@ -23,3 +23,9 @@ steps:
     commands:
       - yarn lint:code
       - yarn lint:package
+  - name: analysis
+    image: aosapps/drone-sonar-plugin
+    secrets: [sonar_host, sonar_token]
+    when:
+      branch:
+        - master
