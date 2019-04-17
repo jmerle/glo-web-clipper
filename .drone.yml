@@ -7,11 +7,8 @@ steps:
     commands:
       - yarn install --frozen-lockfile
   - name: generate-icons
-    image: weboaks/node-karma-protractor-chrome:headless
-    privileged: true
+    image: node:lts
     commands:
-      - ls -l
-      - echo $USER
       - yarn generate:icons
   - name: generate-api
     image: timbru31/java-node:8-alpine
@@ -21,5 +18,8 @@ steps:
     image: node:lts
     commands:
       - yarn build:firefox
+  - name: lint
+    image: node:lts
+    commands:
       - yarn lint:code
       - yarn lint:package
