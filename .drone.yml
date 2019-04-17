@@ -9,6 +9,8 @@ steps:
   - name: generate-icons
     image: weboaks/node-karma-protractor-chrome:headless
     commands:
+      - ls -l
+      - echo $USER
       - yarn generate:icons
   - name: generate-api
     image: timbru31/java-node:8-alpine
