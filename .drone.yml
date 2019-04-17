@@ -8,6 +8,7 @@ steps:
       - yarn install --frozen-lockfile
   - name: generate-icons
     image: weboaks/node-karma-protractor-chrome:headless
+    privileged: true
     commands:
       - ls -l
       - echo $USER
