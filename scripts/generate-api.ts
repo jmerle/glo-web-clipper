@@ -57,6 +57,9 @@ const operationIds: { [path: string]: { [method: string]: string } } = {
   '/boards/{board_id}/columns': {
     post: 'createColumn',
   },
+  '/boards/{board_id}/columns/batch': {
+    post: 'createColumns',
+  },
   '/boards/{board_id}/columns/{column_id}': {
     post: 'editColumn',
     delete: 'deleteColumn',
@@ -90,6 +93,9 @@ const operationIds: { [path: string]: { [method: string]: string } } = {
   '/boards/{board_id}/cards/{card_id}/comments': {
     get: 'getComments',
     post: 'createComment',
+  },
+  '/boards/{board_id}/cards/{card_id}/comments/batch': {
+    post: 'createComments',
   },
   '/boards/{board_id}/cards/{card_id}/comments/{comment_id}': {
     post: 'editComment',
