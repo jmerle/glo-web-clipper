@@ -187,6 +187,14 @@ const operationIds: { [path: string]: { [method: string]: string } } = {
       }
     });
 
+    // Set the input_data error property of batch endpoints to a different type
+    // This is incorrect, but the generator generates invalid TypeScript when it's set to object
+    // Fixed by https://github.com/OpenAPITools/openapi-generator/pull/2453, which has yet to be released
+    // TODO: Remove this when the PR above goes live into a release
+    findDeep(spec, 'input_data').forEach(result => {
+      result.type = 'boolean';
+    });
+
     // Set operation id's which are used as method names
     Object.keys(spec.paths).forEach(url => {
       Object.keys(spec.paths[url]).forEach(method => {
