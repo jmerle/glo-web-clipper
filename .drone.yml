@@ -2,14 +2,6 @@ kind: pipeline
 name: default
 
 steps:
-  - name: debug
-    image: node:lts
-    environment:
-      SONAR_HOST:
-        from_secret: sonar_host
-    commands:
-      - curl -k -v --retry 5 https://sonar.jmerle.dev
-      - curl -k -v --retry 5 $SONAR_HOST
   - name: install
     image: node:lts
     commands:
