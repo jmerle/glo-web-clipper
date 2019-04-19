@@ -26,8 +26,7 @@ steps:
   - name: analysis
     image: aosapps/drone-sonar-plugin
     settings:
-      sonar_host:
-        from_secret: sonar_host
+      sonar_host: https://sonar.jmerle.dev
       sonar_token:
         from_secret: sonar_token
     when:
