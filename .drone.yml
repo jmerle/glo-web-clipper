@@ -2,6 +2,13 @@ kind: pipeline
 name: default
 
 steps:
+  - name: debug
+    image: node:lts
+    commands:
+      - echo $${SONAR_HOST}
+      - curl -k -v https://sonar.jmerle.dev
+      - curl -k -v $${SONAR_HOST}
+    secrets: [sonar_host]
   - name: install
     image: node:lts
     commands:
@@ -23,11 +30,6 @@ steps:
     commands:
       - yarn lint:code
       - yarn lint:package
-  - name: debug
-    image: node:lts
-    commands:
-      - echo $SONAR_HOST
-    secrets: [sonar_host]
   - name: analysis
     image: aosapps/drone-sonar-plugin
     settings:
