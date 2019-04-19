@@ -1,10 +1,13 @@
 # Glo Web Clipper
 
+[![Build Status](https://drone.jmerle.dev/api/badges/jmerle/glo-web-clipper/status.svg)](https://drone.jmerle.dev/jmerle/glo-web-clipper)
+[![Quality Gate Status](https://sonar.jmerle.dev/api/project_badges/measure?project=jmerle%3Aglo-web-clipper&metric=alert_status)](https://sonar.jmerle.dev/dashboard?id=jmerle%3Aglo-web-clipper)
+[![Maintainability Rating](https://sonar.jmerle.dev/api/project_badges/measure?project=jmerle%3Aglo-web-clipper&metric=sqale_rating)](https://sonar.jmerle.dev/dashboard?id=jmerle%3Aglo-web-clipper)
+[![Security Rating](https://sonar.jmerle.dev/api/project_badges/measure?project=jmerle%3Aglo-web-clipper&metric=security_rating)](https://sonar.jmerle.dev/dashboard?id=jmerle%3Aglo-web-clipper)  
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/ikfmgfnieohkknpbninokpleohjpbjbl.svg)](https://chrome.google.com/webstore/detail/glo-web-clipper/ikfmgfnieohkknpbninokpleohjpbjbl)
 [![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/ikfmgfnieohkknpbninokpleohjpbjbl.svg)](https://chrome.google.com/webstore/detail/glo-web-clipper/ikfmgfnieohkknpbninokpleohjpbjbl)  
 [![Mozilla Add-on](https://img.shields.io/amo/v/glo-web-clipper.svg)](https://addons.mozilla.org/en-US/firefox/addon/glo-web-clipper/)
-[![Mozilla Add-on Users](https://img.shields.io/amo/users/glo-web-clipper.svg)](https://addons.mozilla.org/en-US/firefox/addon/glo-web-clipper/)  
-[![Build Status](https://drone.jmerle.dev/api/badges/jmerle/glo-web-clipper/status.svg)](https://drone.jmerle.dev/jmerle/glo-web-clipper)
+[![Mozilla Add-on Users](https://img.shields.io/amo/users/glo-web-clipper.svg)](https://addons.mozilla.org/en-US/firefox/addon/glo-web-clipper/)
 
 Clip it, describe it and save it to a GitKraken Glo card.
 
