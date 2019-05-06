@@ -34,7 +34,8 @@ pipeline {
 
                 stage("Lint code") {
                     steps {
-                        sh "yarn lint:code"
+                        sh "yarn lint:tslint"
+                        sh "yarn lint:prettier"
                     }
                 }
 
