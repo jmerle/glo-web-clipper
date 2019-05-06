@@ -12,7 +12,12 @@ export const Checkbox: Component<Attributes> = ({ label, onChange, initialValue 
     <FormSection>
       <label className="gwc-checkbox">
         {label}
-        <input type="checkbox" name="checked" onchange={(ev: any) => onChange(ev.target.checked)} defaultChecked={initialValue} />
+        <input
+          type="checkbox"
+          name="checked"
+          onchange={(ev: any) => onChange(ev.target.checked)}
+          defaultChecked={initialValue}
+        />
         <span />
       </label>
     </FormSection>

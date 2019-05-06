@@ -11,9 +11,10 @@
     "generate": "yarn generate:icons && yarn generate:api",
     "generate:icons": "ts-node scripts/generate-icons",
     "generate:api": "ts-node scripts/generate-api",
-    "lint": "yarn lint:code && yarn lint:package",
-    "lint:code": "tslint -p tsconfig.json -c tslint.json -t stylish",
-    "lint:package": "yarn build:firefox && web-ext lint -s build/ -o text",
+    "lint": "yarn lint:tslint && yarn lint:prettier && yarn lint:package",
+    "lint:tslint": "tslint -p tsconfig.json -c tslint.json -t stylish",
+    "lint:prettier": "prettier-check --ignore-path .gitignore '**/*.{ts,tsx,scss,html,json}'",
+    "lint:package": "web-ext lint -s build/ -o text",
     "build": "webpack --progress --colors --mode=production",
     "build:chrome": "cross-env BROWSER=chrome yarn build",
     "build:firefox": "cross-env BROWSER=firefox yarn build",
@@ -23,7 +24,8 @@
     "start:chrome": "yarn build:chrome && ts-node scripts/chrome-launch",
     "start:firefox": "yarn build:firefox && web-ext run -s build/ --start-url https://jaspervanmerle.com/ --pref devtools.browserconsole.filter.jswarn=false --pref devtools.webconsole.filter.warn=false",
     "dev:chrome": "yarn build:chrome && concurrently 'yarn start:chrome' 'yarn build:chrome --watch' -n chrome,webpack -c blue,yellow --kill-others",
-    "dev:firefox": "yarn build:firefox && concurrently 'yarn start:firefox' 'yarn build:firefox --watch' -n web-ext,webpack -c blue,yellow --kill-others"
+    "dev:firefox": "yarn build:firefox && concurrently 'yarn start:firefox' 'yarn build:firefox --watch' -n web-ext,webpack -c blue,yellow --kill-others",
+    "prettier": "prettier --write --ignore-path .gitignore '**/*.{ts,tsx,scss,html,json}'"
   },
   "dependencies": {
     "croppr": "2.3.1",
@@ -54,6 +56,7 @@
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.6.0",
     "prettier": "^1.16.4",
+    "prettier-check": "^2.0.0",
     "sass": "^1.17.4",
     "sass-loader": "^7.1.0",
     "sharp": "^0.22.0",
@@ -74,8 +77,8 @@
     }
   },
   "lint-staged": {
-    "*.ts": [
-      "yarn lint:code --fix",
+    "*.{ts,tsx}": [
+      "yarn lint:tslint --fix",
       "prettier --write",
       "git add"
     ],

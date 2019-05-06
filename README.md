@@ -1,6 +1,6 @@
 # Glo Web Clipper
 
-[![Build Status](https://drone.jmerle.dev/api/badges/jmerle/glo-web-clipper/status.svg)](https://drone.jmerle.dev/jmerle/glo-web-clipper)
+[![Build Status](https://jenkins.jmerle.dev/buildStatus/icon?job=glo-web-clipper%2Fmaster)](https://jenkins.jmerle.dev/job/glo-web-clipper/job/master/)
 [![Quality Gate Status](https://sonar.jmerle.dev/api/project_badges/measure?project=jmerle%3Aglo-web-clipper&metric=alert_status)](https://sonar.jmerle.dev/dashboard?id=jmerle%3Aglo-web-clipper)
 [![Maintainability Rating](https://sonar.jmerle.dev/api/project_badges/measure?project=jmerle%3Aglo-web-clipper&metric=sqale_rating)](https://sonar.jmerle.dev/dashboard?id=jmerle%3Aglo-web-clipper)
 [![Security Rating](https://sonar.jmerle.dev/api/project_badges/measure?project=jmerle%3Aglo-web-clipper&metric=security_rating)](https://sonar.jmerle.dev/dashboard?id=jmerle%3Aglo-web-clipper)  
