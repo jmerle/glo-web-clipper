@@ -2,8 +2,9 @@
 
 [![Build Status](https://jenkins.jmerle.dev/buildStatus/icon?job=glo-web-clipper%2Fmaster)](https://jenkins.jmerle.dev/job/glo-web-clipper/job/master/)
 [![Quality Gate Status](https://sonar.jmerle.dev/api/project_badges/measure?project=jmerle%3Aglo-web-clipper&metric=alert_status)](https://sonar.jmerle.dev/dashboard?id=jmerle%3Aglo-web-clipper)
-[![Maintainability Rating](https://sonar.jmerle.dev/api/project_badges/measure?project=jmerle%3Aglo-web-clipper&metric=sqale_rating)](https://sonar.jmerle.dev/dashboard?id=jmerle%3Aglo-web-clipper)
-[![Security Rating](https://sonar.jmerle.dev/api/project_badges/measure?project=jmerle%3Aglo-web-clipper&metric=security_rating)](https://sonar.jmerle.dev/dashboard?id=jmerle%3Aglo-web-clipper)  
+[![Coverage](https://sonar.jmerle.dev/api/project_badges/measure?project=jmerle%3Aglo-web-clipper&metric=coverage)](https://sonar.jmerle.dev/dashboard?id=jmerle%3Aglo-web-clipper)
+[![Bugs](https://sonar.jmerle.dev/api/project_badges/measure?project=jmerle%3Aglo-web-clipper&metric=bugs)](https://sonar.jmerle.dev/dashboard?id=jmerle%3Aglo-web-clipper)
+[![Vulnerabilities](https://sonar.jmerle.dev/api/project_badges/measure?project=jmerle%3Aglo-web-clipper&metric=vulnerabilities)](https://sonar.jmerle.dev/dashboard?id=jmerle%3Aglo-web-clipper)  
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/ikfmgfnieohkknpbninokpleohjpbjbl.svg)](https://chrome.google.com/webstore/detail/glo-web-clipper/ikfmgfnieohkknpbninokpleohjpbjbl)
 [![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/ikfmgfnieohkknpbninokpleohjpbjbl.svg)](https://chrome.google.com/webstore/detail/glo-web-clipper/ikfmgfnieohkknpbninokpleohjpbjbl)  
 [![Mozilla Add-on](https://img.shields.io/amo/v/glo-web-clipper.svg)](https://addons.mozilla.org/en-US/firefox/addon/glo-web-clipper/)
