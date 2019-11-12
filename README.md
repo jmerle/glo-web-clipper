@@ -78,4 +78,4 @@ Third-party libraries that can be found in the extension:
 - A modified version of [modern-normalize 0.5.0](https://github.com/sindresorhus/modern-normalize/blob/v0.5.0/modern-normalize.css) in [styles/utils/_normalize.scss](styles/utils/_normalize.scss)
 - [Reset CSS 2.0](https://meyerweb.com/eric/tools/css/reset/) in [styles/utils/_reset.scss](styles/utils/_reset.scss)
 
-Package the extension by `cd`'ing into the source code submission directory, installing the dependencies with `yarn` and packaging with `yarn package`. The result can be found in the dist/ directory.
+Package the extension by `cd`'ing into the source code submission directory, installing the dependencies with `yarn`, generating the icons and the API client with `yarn generate` and packaging with `yarn package:firefox`. The result can be found in the dist/firefox directory.
