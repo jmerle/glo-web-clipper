@@ -59,7 +59,7 @@
     "prettier-check": "^2.0.0",
     "sass": "^1.17.4",
     "sass-loader": "^7.1.0",
-    "sharp": "^0.22.0",
+    "sharp": "^0.30.5",
     "svgexport": "^0.3.2",
     "ts-loader": "^5.3.3",
     "ts-node": "^8.0.3",
